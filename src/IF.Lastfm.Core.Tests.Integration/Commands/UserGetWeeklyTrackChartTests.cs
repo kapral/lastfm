@@ -1,13 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
+
 namespace IF.Lastfm.Core.Tests.Integration.Commands
 {
-    /*
-    *  Sorry, but this is a bad test!
-    *  It is based on expectation, that there is some activity in the Last.fm users profile and will fail when there were no scrobles for last three weeks.
-    *  The tests should not expect any data input outside!
-
     public class UserGetWeeklyTrackChartTests : CommandIntegrationTestsBase
     {
-    [Test]
+
+        [Test]
         public async Task GetTrackChart_Success()
         {
             //call GetWeeklyChartList to get available weeks
@@ -23,17 +26,19 @@ namespace IF.Lastfm.Core.Tests.Integration.Commands
             //get weekly chart for the week before
             var responsePrev = await Lastfm.User.GetWeeklyTrackChartAsync(INTEGRATION_TEST_USER, fromPrevWeek, toPrevWeek);
             var trackChartPrev = responsePrev.Content;
-
+            
             Assert.IsTrue(response.Success, "User.GetWeeklyChartListAsync - response.Success was not true");
 
-            //Values will vary from week to week so just checking that we got some values back
-            Assert.IsNotEmpty(trackChart, "User.GetWeeklyChartListAsync - response.Content was empty");
-            Assert.IsNotEmpty(trackChart.First().Name);
-            Assert.IsNotEmpty(trackChart.First().ArtistName);
+            // Test account hasn't been scrobling so the weekly charts haven't been generating
+            // Charts are currently empty as expected
 
-            //check that the two different weekly charts are not the same
-            Assert.IsFalse(trackChart.First().Name == trackChartPrev.First().Name);
+            //Values will vary from week to week so just checking that we got some values back
+            //Assert.IsNotEmpty(trackChart, "User.GetWeeklyChartListAsync - response.Content was empty");
+            //Assert.IsNotEmpty(trackChart.First().Name);
+            //Assert.IsNotEmpty(trackChart.First().ArtistName);
+
+            ////check that the two different weekly charts are not the same
+            //Assert.IsFalse(trackChart.First().Name == trackChartPrev.First().Name);
         }
     }
-    */
 }
