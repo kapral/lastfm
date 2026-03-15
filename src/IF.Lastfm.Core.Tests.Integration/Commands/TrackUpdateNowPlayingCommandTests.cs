@@ -1,13 +1,11 @@
-using IF.Lastfm.Core.Api;
-using IF.Lastfm.Core.Objects;
-using NUnit.Framework;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using IF.Lastfm.Core.Objects;
+using NUnit.Framework;
 
 namespace IF.Lastfm.Core.Tests.Integration.Commands
 {
-    
     public class TrackUpdateNowPlayingCommandTests : CommandIntegrationTestsBase
     {
         private const string ARTIST_NAME = "Crystal Castles";
@@ -37,6 +35,7 @@ namespace IF.Lastfm.Core.Tests.Integration.Commands
                 Name = TRACK_NAME,
                 ArtistName = ARTIST_NAME,
                 AlbumName = ALBUM_NAME,
+                ArtistUrl = new Uri($"https://www.last.fm/music/{ARTIST_NAME.Replace(' ', '+')}"),
                 IsNowPlaying = true
             };
 
@@ -45,8 +44,13 @@ namespace IF.Lastfm.Core.Tests.Integration.Commands
             // Some properties change from time to time
             actual.Mbid = null;
             actual.ArtistMbid = null;
+            actual.ArtistImages = null;
             actual.Images = null;
+            actual.IsLoved = null;
             actual.Url = null;
+            actual.ArtistImages = null;
+            actual.ArtistUrl = null;
+            actual.IsLoved = null;
 
             var expectedJson = expectedTrack.TestSerialise();
             var actualJson = actual.TestSerialise();

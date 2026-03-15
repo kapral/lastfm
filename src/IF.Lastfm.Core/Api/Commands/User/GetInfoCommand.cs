@@ -40,7 +40,7 @@ namespace IF.Lastfm.Core.Api.Commands.User
             }
             else
             {
-                return LastResponse.CreateErrorResponse<LastResponse<LastUser>>(status);
+                return LastResponse.CreateErrorResponse<LastResponse<LastUser>>(json, response);
             }
         }
     }

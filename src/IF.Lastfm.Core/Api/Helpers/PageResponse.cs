@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using IF.Lastfm.Core.Api.Enums;
 using IF.Lastfm.Core.Json;
 using Newtonsoft.Json;
@@ -82,6 +83,23 @@ namespace IF.Lastfm.Core.Api.Helpers
             var r = new PageResponse<T>
             {
                 Status = status
+            };
+
+            r.AddDefaultPageInfo();
+
+            return r;
+        }
+
+        internal static PageResponse<T> CreateErrorResponse(string json, HttpResponseMessage httpResponse)
+        {
+            LastResponseStatus status;
+            string message;
+            LastFm.IsResponseValid(json, out status, out message);
+            var r = new PageResponse<T>
+            {
+                Status = status,
+                ErrorMessage = message,
+                HttpStatusCode = httpResponse.StatusCode
             };
 
             r.AddDefaultPageInfo();

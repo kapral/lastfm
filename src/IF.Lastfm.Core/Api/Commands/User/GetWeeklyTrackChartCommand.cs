@@ -50,7 +50,7 @@ namespace IF.Lastfm.Core.Api.Commands.User
                 return PageResponse<LastTrack>.CreateSuccessResponse(itemsToken, pageInfoToken, LastTrack.ParseJToken, LastPageResultsType.Attr);
             }
 
-            return LastResponse.CreateErrorResponse<PageResponse<LastTrack>>(status);
+            return LastResponse.CreateErrorResponse<PageResponse<LastTrack>>(json, response);
         }
     }
 }

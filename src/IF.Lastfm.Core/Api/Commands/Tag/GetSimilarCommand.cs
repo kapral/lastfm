@@ -41,7 +41,7 @@ namespace IF.Lastfm.Core.Api.Commands.Tag
                 return PageResponse<LastTag>.CreateSuccessResponse(itemsToken, jt => LastTag.ParseJToken(jt, relatedTag));
             }
 
-            return LastResponse.CreateErrorResponse<PageResponse<LastTag>>(status);
+            return LastResponse.CreateErrorResponse<PageResponse<LastTag>>(json, response);
         }
     }
 }

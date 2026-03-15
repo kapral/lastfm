@@ -61,7 +61,7 @@ namespace IF.Lastfm.Core.Api.Commands.Track
             }
             else
             {
-                return LastResponse.CreateErrorResponse<ScrobbleResponse>(status);
+                return LastResponse.CreateErrorResponse<ScrobbleResponse>(json, response);
             }
         }
     }

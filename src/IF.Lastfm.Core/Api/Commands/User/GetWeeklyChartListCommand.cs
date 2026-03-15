@@ -40,7 +40,7 @@ namespace IF.Lastfm.Core.Api.Commands.User
                 return PageResponse<LastWeeklyChartList>.CreateSuccessResponse(itemsToken, pageInfoToken, LastWeeklyChartList.ParseJToken, LastPageResultsType.Attr);
             }
 
-            return LastResponse.CreateErrorResponse<PageResponse<LastWeeklyChartList>>(status);
+            return LastResponse.CreateErrorResponse<PageResponse<LastWeeklyChartList>>(json, response);
         }
     }
 }

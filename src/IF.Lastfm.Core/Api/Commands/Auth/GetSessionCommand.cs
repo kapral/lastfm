@@ -9,17 +9,14 @@ using Newtonsoft.Json.Linq;
 
 namespace IF.Lastfm.Core.Api.Commands.Auth
 {
-    [ApiMethodName("auth.getMobileSession")]
-    internal class GetMobileSessionCommand : UnauthenticatedPostAsyncCommandBase<LastResponse<LastUserSession>>
+    [ApiMethodName("auth.getSession")]
+    internal class GetSessionCommand : UnauthenticatedPostAsyncCommandBase<LastResponse<LastUserSession>>
     {
-        public string Username { get; set; }
+        private string Token { get; }
 
-        public string Password { get; set; }
-
-        public GetMobileSessionCommand(ILastAuth auth, string username, string password) : base(auth)
+        public GetSessionCommand(ILastAuth auth, string authToken) : base(auth)
         {
-            Username = username;
-            Password = password;
+            Token = authToken;
         }
 
         protected override Uri BuildRequestUrl()
@@ -29,16 +26,14 @@ namespace IF.Lastfm.Core.Api.Commands.Auth
 
         public override void SetParameters()
         {
-            Parameters.Add("username", Username);
-            Parameters.Add("password", Password);
+            Parameters.Add("token", Token);
         }
 
         public override async Task<LastResponse<LastUserSession>> HandleResponse(HttpResponseMessage response)
         {
             var json = await response.Content.ReadAsStringAsync();
 
-            LastResponseStatus status;
-            if (LastFm.IsResponseValid(json, out status) && response.IsSuccessStatusCode)
+            if (LastFm.IsResponseValid(json, out LastResponseStatus status) && response.IsSuccessStatusCode)
             {
                 var sessionObject = JsonConvert.DeserializeObject<JObject>(json).GetValue("session");
                 var session = JsonConvert.DeserializeObject<LastUserSession>(sessionObject.ToString());

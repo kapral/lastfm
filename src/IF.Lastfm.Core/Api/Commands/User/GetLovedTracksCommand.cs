@@ -45,7 +45,7 @@ namespace IF.Lastfm.Core.Api.Commands.User
             }
             else
             {
-                return LastResponse.CreateErrorResponse<PageResponse<LastTrack>>(status);
+                return LastResponse.CreateErrorResponse<PageResponse<LastTrack>>(json, response);
             }
         }
     }

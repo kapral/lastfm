@@ -50,7 +50,7 @@ namespace IF.Lastfm.Core.Api.Commands.Track
             }
             else
             {
-                return LastResponse.CreateErrorResponse<PageResponse<LastShout>>(status);
+                return LastResponse.CreateErrorResponse<PageResponse<LastShout>>(json, response);
             }
         }
     }

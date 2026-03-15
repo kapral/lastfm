@@ -12,16 +12,21 @@ namespace IF.Lastfm.Core.Api.Commands.Track
     internal class SearchCommand : GetAsyncCommandBase<PageResponse<LastTrack>>
     {
         public string TrackName { get; set; }
+        public string ArtistName { get; set; }
 
-        public SearchCommand(ILastAuth auth, string trackName)
+        public SearchCommand(ILastAuth auth, string trackName, string artistName = "")
             : base(auth)
         {
             TrackName = trackName;
+            ArtistName = artistName;
         }
 
         public override void SetParameters()
         {
             Parameters.Add("track", TrackName);
+            if (ArtistName.Length > 0) {
+                Parameters.Add("artist ", ArtistName);
+            }
 
             AddPagingParameters();
             DisableCaching();
@@ -42,7 +47,7 @@ namespace IF.Lastfm.Core.Api.Commands.Track
             }
             else
             {
-                return LastResponse.CreateErrorResponse<PageResponse<LastTrack>>(status);
+                return LastResponse.CreateErrorResponse<PageResponse<LastTrack>>(json, response);
             }
         }
     }

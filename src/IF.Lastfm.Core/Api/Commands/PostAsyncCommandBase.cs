@@ -56,9 +56,9 @@ namespace IF.Lastfm.Core.Api.Commands
                     return await HandleResponse(response);
                 }
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
-                return LastResponse.CreateErrorResponse<T>(LastResponseStatus.RequestFailed);
+                return new T { Status = LastResponseStatus.RequestFailed, Exception = ex };
             }
         }
     }

@@ -45,8 +45,8 @@ namespace IF.Lastfm.Core.Api.Commands.Tag
             }
             else
             {
-                // The tag api always returns a "valid" response, so 
-                return PageResponse<LastArtist>.CreateErrorResponse(status);
+                // The tag api always returns a "valid" response, so
+                return PageResponse<LastArtist>.CreateErrorResponse(json, response);
             }
         }
     }

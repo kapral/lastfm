@@ -45,7 +45,7 @@ namespace IF.Lastfm.Core.Api.Commands.User
                 return PageResponse<LastArtist>.CreateSuccessResponse(itemsToken, pageInfoToken, LastArtist.ParseJToken, LastPageResultsType.Attr);
             }
 
-            return LastResponse.CreateErrorResponse<PageResponse<LastArtist>>(status);
+            return LastResponse.CreateErrorResponse<PageResponse<LastArtist>>(json, response);
         }
     }
 }

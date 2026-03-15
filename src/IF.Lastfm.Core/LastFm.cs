@@ -88,6 +88,14 @@ namespace IF.Lastfm.Core
         /// <returns>True when the JSON could be parsed and it didn't describe a known Last.Fm Status.</returns>
         public static bool IsResponseValid(string json, out LastResponseStatus status)
         {
+            string message;
+            return IsResponseValid(json, out status, out message);
+        }
+
+        public static bool IsResponseValid(string json, out LastResponseStatus status, out string message)
+        {
+            message = null;
+
             if (string.IsNullOrWhiteSpace(json))
             {
                 status = LastResponseStatus.Unknown;
@@ -113,6 +121,7 @@ namespace IF.Lastfm.Core
             }
 
             status = LastResponseStatus.Unknown;
+            message = jo.Value<string>("message");
 
             int code;
             if (Int32.TryParse(codeString, out code))

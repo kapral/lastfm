@@ -1,19 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-		<PackageId>Inflatable.Lastfm</PackageId>
-    <VersionPrefix>1.2.0</VersionPrefix> <!-- https://stackoverflow.com/a/42615574/268555 -->
+    <PackageId>Lastream.Lastfm</PackageId>
+    <VersionPrefix>1.0.0</VersionPrefix> <!-- https://stackoverflow.com/a/42615574/268555 -->
 
-		<Title>Inflatable Last.fm SDK</Title>
-		<Description>Last.fm SDK for modern .NET platforms.</Description>
-		<Authors>Rikki Tooley (@rikkilt)</Authors>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/inflatablefriends/lastfm</PackageProjectUrl>
-		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<PackageTags>lastfm last.fm inflatable friends sdk api music metadata scrobble scrobbling portable netstandard</PackageTags>
+    <Title>Lastream Last.fm SDK</Title>
+    <Description>Last.fm SDK for modern .NET platforms. Maintained fork of Inflatable.Lastfm.</Description>
+    <Authors>kapral</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/kapral/lastfm</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>lastfm last.fm sdk api music metadata scrobble scrobbling portable netstandard</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard1.1</TargetFramework>
