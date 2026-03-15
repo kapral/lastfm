@@ -34,7 +34,7 @@ namespace IF.Lastfm.Core.Api.Commands.Tag
                 return PageResponse<LastTag>.CreateSuccessResponse(itemsToken, LastTag.ParseJToken);
             }
 
-            return PageResponse<LastTag>.CreateErrorResponse(status);
+            return PageResponse<LastTag>.CreateErrorResponse(json, response);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace IF.Lastfm.Core.Api.Commands.Album
             }
             else
             {
-                return PageResponse<LastTag>.CreateErrorResponse(status);
+                return PageResponse<LastTag>.CreateErrorResponse(json, response);
             }
         }
     }

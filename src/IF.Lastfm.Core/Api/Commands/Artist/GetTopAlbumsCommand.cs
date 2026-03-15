@@ -47,7 +47,7 @@ namespace IF.Lastfm.Core.Api.Commands.Artist
             }
             else
             {
-                return LastResponse.CreateErrorResponse<PageResponse<LastAlbum>>(status);
+                return LastResponse.CreateErrorResponse<PageResponse<LastAlbum>>(json, response);
             }
         }
     }

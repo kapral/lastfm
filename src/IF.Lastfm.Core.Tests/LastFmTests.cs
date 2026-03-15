@@ -30,7 +30,7 @@ namespace IF.Lastfm.Core.Tests
         public void IsResponseValid()
         {
             LastResponseStatus status;
-            
+
             Assert.IsFalse(LastFm.IsResponseValid(null, out status));
             Assert.IsFalse(LastFm.IsResponseValid("{invalid json", out status));
 
@@ -38,6 +38,11 @@ namespace IF.Lastfm.Core.Tests
             //var error6 = Encoding.UTF8.GetString(ArtistApiResponses.ArtistGetTagsError);
             Assert.IsFalse(LastFm.IsResponseValid(error6, out status));
             Assert.AreEqual(LastResponseStatus.MissingParameters, status);
+
+            string message;
+            Assert.IsFalse(LastFm.IsResponseValid(error6, out status, out message));
+            Assert.AreEqual(LastResponseStatus.MissingParameters, status);
+            Assert.AreEqual("Invalid user supplied", message);
 
             var goodResponse = GetFileContents("ArtistApi.ArtistGetInfoSuccess.json");
             //var goodResponse = Encoding.UTF8.GetString(ArtistApiResponses.ArtistGetInfoSuccess);
