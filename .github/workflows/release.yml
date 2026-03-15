@@ -9,6 +9,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # required for NuGet trusted publishing (OIDC)
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -24,7 +26,7 @@ jobs:
     - name: Pack
       run: dotnet pack -c Release --no-build --include-source -o ./tmp IF.Lastfm.sln
     - name: Publish
-      run: dotnet nuget push ./tmp/Inflatable.Lastfm*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push ./tmp/Lastream.Lastfm*.nupkg -s https://api.nuget.org/v3/index.json --skip-duplicate
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:

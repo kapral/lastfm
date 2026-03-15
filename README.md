@@ -1,22 +1,31 @@
-# Inflatable Last.fm .NET SDK
-
-![Project logo](./res/if-lastfm-logo-300.png)
+# Lastream Last.fm .NET SDK
 
 [![Code licence](https://img.shields.io/badge/licence-MIT-blue.svg?style=flat)](LICENCE.md)
+[![NuGet](https://img.shields.io/nuget/v/Lastream.Lastfm.svg)](https://www.nuget.org/packages/Lastream.Lastfm/)
 
-## Maintenence help wanted
+> This is a maintained fork of [inflatablefriends/lastfm](https://github.com/inflatablefriends/lastfm) (originally published as `Inflatable.Lastfm`), which has not seen active development since 2019. The fork preserves full backwards compatibility while adding improvements described below.
 
-Hi there! The maintainer of this library @rikkit is now mostly a TypeScript + React dev, and has been for the last several years. Since this is a .Net library, the maintainer will probably not be able to keep it up-to-date to the latest .Net standards. If you spot something wrong, please file and issue or better yet, a pull request. Thanks!
+## What this fork adds
+
+- **Richer error details on all responses** — `LastResponse` now exposes:
+  - `ErrorMessage` — the human-readable message from the Last.fm API (e.g. `"The artist you supplied could not be found"`)
+  - `HttpStatusCode` — the HTTP status code returned by the server
+  - `Exception` — the `HttpRequestException` when a network failure occurs (`Status == RequestFailed`)
+
+- **Web authentication flow** (`auth.getSession`) — `client.Auth.GetSessionTokenAsync(authToken)` exchanges a web-auth callback token for a session key, enabling the [Last.fm web auth flow](https://www.last.fm/api/webauth)
+
+- **Desktop authentication flow** (`auth.getToken`) — `client.Auth.GetAuthTokenAsync()` fetches an unauthorised request token as step 1 of the [desktop auth flow](https://www.last.fm/api/desktopauth)
+
+- **Artist-filtered track search** — `client.Track.SearchAsync` accepts an optional `artistName` parameter to narrow results to a specific artist
 
 ## Project Goals
 
 - To provide complete .NET bindings for the Last.fm REST API
 - To build useful components for Last.fm applications
-- To be the very best, like no-one ever was
 
 ## Contributing
 
-Input is always welcome! [Raise an issue on GitHub](https://github.com/inflatablefriends/lastfm/issues), or send a message to [the Gitter chatroom](https://gitter.im/inflatablefriends/lastfm) if you need help with the library. 
+[Raise an issue on GitHub](https://github.com/kapral/lastfm/issues) or submit a pull request.
 
 If you're interested in contributing code or documentation, [this short introduction to the library](doc/contributing.md) will help you get started.
 
@@ -26,13 +35,12 @@ If you're interested in contributing code or documentation, [this short introduc
 
 #### NuGet
 
-Install [Inflatable.Lastfm](
-https://www.nuget.org/packages/Inflatable.Lastfm/) from NuGet.
+Install [Lastream.Lastfm](https://www.nuget.org/packages/Lastream.Lastfm/) from NuGet.
 
-#### NuGet - prerelease code
+#### From source
 
-1. Install the [.NET Core SDK](https://docs.microsoft.com/en-us/dotnet/core/install/sdk)
-2. Clone this repo and checkout to the commit you need
+1. Install the [.NET SDK](https://docs.microsoft.com/en-us/dotnet/core/install/sdk)
+2. Clone this repo
 3. Run `dotnet pack`
 4. Reference the built NuGet package file in your project
 
@@ -69,45 +77,49 @@ var response = await client.Auth.GetSessionTokenAsync("username", "pass");
 
 // or load an existing session
 UserSession cachedSession;
-var succesful = client.Auth.LoadSession(cachedSession);
+var successful = client.Auth.LoadSession(cachedSession);
 ```
 
-Authenticated methods then work like any other
+Authenticated methods then work like any other:
 
 ```c#
 if (client.Auth.HasAuthenticated) {
-	var response = await client.Track.LoveAsync("Ibi Dreams of Pavement (A Better Day)", "Broken Social Scene");
+    var response = await client.Track.LoveAsync("Ibi Dreams of Pavement (A Better Day)", "Broken Social Scene");
+}
+```
+
+### Error handling
+
+All responses surface full error details:
+
+```c#
+var response = await client.Artist.GetInfoAsync("nonexistent artist");
+
+if (!response.Success) {
+    Console.WriteLine(response.Status);        // LastResponseStatus.MissingParameters
+    Console.WriteLine(response.ErrorMessage);  // "The artist you supplied could not be found"
+    Console.WriteLine(response.HttpStatusCode); // System.Net.HttpStatusCode.OK
+    Console.WriteLine(response.Exception);     // non-null only for network failures
 }
 ```
 
 ## Documentation
 
-- [Api method progress report](PROGRESS.md)
+- [API method progress report](PROGRESS.md)
 - [Contributing](doc/contributing.md)
 - [Scrobbling](doc/scrobbling.md)
 - [Dependency Injection](doc/dependency-injection.md)
-- [Example Windows Phone app](https://github.com/inflatablefriends/lastfm-samples)
 
 ## Platform Compatibility
 
-The main package targets ```netstandard1.1```. Development is on the ```master``` branch.
+The main package targets `netstandard1.1`, compatible with .NET Framework 4.5.1+, .NET Core, UWP, and Xamarin.
 
 ### Dependencies
 
-- Newtonsoft.Json 9.0.1 =<
-- System.Net.Http 4.3.0 =<
-
-### Supported platforms
-
-Check [this table](https://docs.microsoft.com/en-us/dotnet/articles/standard/library#net-platforms-support) for supported platforms.
-
-### Other platforms
-
-If you need support for a .NET platform that doesn't support .Net Standard 1.1, first see if the feature you need is available in v0.3 or earlier - that version targeted PCL profile 259, and so is compatible with e.g. Windows 8.0 and Windows Phone 7.
-
-If you need a feature for these older platforms, please raise an issue.
+- Newtonsoft.Json 9.0.1
+- System.Net.Http 4.3.2
 
 ## Credits
 
-Maintained by [@rikkilt](http://twitter.com/rikkilt).
-Thanks to [all contributors](https://github.com/inflatablefriends/lastfm/graphs/contributors)!
+Original library by [@rikkilt](http://twitter.com/rikkilt) and [contributors](https://github.com/inflatablefriends/lastfm/graphs/contributors).
+Fork maintained by [@kapral](https://github.com/kapral).
