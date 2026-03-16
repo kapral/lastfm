@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IF.Lastfm.Core", "src\IF.La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IF.Lastfm.Core.Tests", "src\IF.Lastfm.Core.Tests\IF.Lastfm.Core.Tests.csproj", "{7CAA2717-2CFA-48AD-B29A-BDD2E1E393CC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F418C3B9-24A6-452C-90C5-484994498D8C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{56A0B9B4-03AF-472F-8BD6-C43DCF3C7664}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\branch.yml = .github\workflows\branch.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BFD08349-6DE7-49D1-8C94-CD79BDB138BC} = {91BAA1F1-AA7B-4C1B-9AB9-300B74216920}
 		{7CAA2717-2CFA-48AD-B29A-BDD2E1E393CC} = {91BAA1F1-AA7B-4C1B-9AB9-300B74216920}
+		{56A0B9B4-03AF-472F-8BD6-C43DCF3C7664} = {F418C3B9-24A6-452C-90C5-484994498D8C}
 	EndGlobalSection
 EndGlobal

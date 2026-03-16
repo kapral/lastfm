@@ -2,13 +2,14 @@ name: Build & Test
 
 on:
   push:
-    branches-ignore:
-    - release
+    branches:
+    - dev
     paths-ignore:
     - 'doc/**'
   pull_request:
-    branches-ignore:
+    branches:
     - release
+    - dev
     paths-ignore:
     - 'doc/**'
 
