@@ -22,13 +22,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Library
                 Name = "Crystal Castles",
                 PlayCount = 4219,
                 Mbid = "b1570544-93ab-4b2b-8398-131735394202",
-                Url = new Uri("https://www.last.fm/music/Crystal+Castles"),
-                MainImage = new LastImageSet(
-                    "https://lastfm-img2.akamaized.net/i/u/34s/f36a92bfbd7f8b579c91942c6a428d69.png",
-                    "https://lastfm-img2.akamaized.net/i/u/64s/f36a92bfbd7f8b579c91942c6a428d69.png",
-                    "https://lastfm-img2.akamaized.net/i/u/174s/f36a92bfbd7f8b579c91942c6a428d69.png",
-                    "https://lastfm-img2.akamaized.net/i/u/300x300/f36a92bfbd7f8b579c91942c6a428d69.png",
-                    "https://lastfm-img2.akamaized.net/i/u/f36a92bfbd7f8b579c91942c6a428d69.png")
+                Url = new Uri("https://www.last.fm/music/Crystal+Castles")
             };
 
             var file = GetFileContents("LibraryApi.LibraryGetArtistsMultiple.json");
@@ -54,13 +48,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Library
                 Name = "Crystal Castles",
                 PlayCount = 4219,
                 Mbid = "b1570544-93ab-4b2b-8398-131735394202",
-                Url = new Uri("https://www.last.fm/music/Crystal+Castles"),
-                MainImage = new LastImageSet(
-                    "https://lastfm-img2.akamaized.net/i/u/34s/f36a92bfbd7f8b579c91942c6a428d69.png",
-                    "https://lastfm-img2.akamaized.net/i/u/64s/f36a92bfbd7f8b579c91942c6a428d69.png",
-                    "https://lastfm-img2.akamaized.net/i/u/174s/f36a92bfbd7f8b579c91942c6a428d69.png",
-                    "https://lastfm-img2.akamaized.net/i/u/300x300/f36a92bfbd7f8b579c91942c6a428d69.png",
-                    "https://lastfm-img2.akamaized.net/i/u/f36a92bfbd7f8b579c91942c6a428d69.png")
+                Url = new Uri("https://www.last.fm/music/Crystal+Castles")
             };
 
             var file = GetFileContents("LibraryApi.LibraryGetArtistsSingle.json");

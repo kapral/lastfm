@@ -56,13 +56,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
                 Name = "Anathema",
                 PlayCount = 5216,
                 Mbid = "20aa23e3-3532-42ca-acf6-e8c2e9df2688",
-                Url = new Uri("http://www.last.fm/music/Anathema"),
-                MainImage =
-                    new LastImageSet("http://userserve-ak.last.fm/serve/34/12571597.jpg",
-                        "http://userserve-ak.last.fm/serve/64/12571597.jpg",
-                        "http://userserve-ak.last.fm/serve/126/12571597.jpg",
-                        "http://userserve-ak.last.fm/serve/252/12571597.jpg",
-                        "http://userserve-ak.last.fm/serve/_/12571597/Anathema+Judgement+promo.jpg")
+                Url = new Uri("http://www.last.fm/music/Anathema")
             };
 
             var file = GetFileContents("UserApi.UserGetTopArtistsSingle.json");
@@ -100,26 +94,14 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
                     Name = "Anathema",
                     PlayCount = 5216,
                     Mbid = "20aa23e3-3532-42ca-acf6-e8c2e9df2688",
-                    Url = new Uri("http://www.last.fm/music/Anathema"),
-                    MainImage =
-                        new LastImageSet("http://userserve-ak.last.fm/serve/34/12571597.jpg",
-                            "http://userserve-ak.last.fm/serve/64/12571597.jpg",
-                            "http://userserve-ak.last.fm/serve/126/12571597.jpg",
-                            "http://userserve-ak.last.fm/serve/252/12571597.jpg",
-                            "http://userserve-ak.last.fm/serve/_/12571597/Anathema+Judgement+promo.jpg")
+                    Url = new Uri("http://www.last.fm/music/Anathema")
                 },
                 new LastArtist
                 {
                     Name = "Insomnium",
                     PlayCount = 4670,
                     Mbid = "c1f8e226-75ea-4fe6-83ce-59c122bcbca4",
-                    Url = new Uri("http://www.last.fm/music/Insomnium"),
-                    MainImage =
-                        new LastImageSet("http://userserve-ak.last.fm/serve/34/70409268.jpg",
-                            "http://userserve-ak.last.fm/serve/64/70409268.jpg",
-                            "http://userserve-ak.last.fm/serve/126/70409268.jpg",
-                            "http://userserve-ak.last.fm/serve/252/70409268.jpg",
-                            "http://userserve-ak.last.fm/serve/500/70409268/Insomnium.jpg")
+                    Url = new Uri("http://www.last.fm/music/Insomnium")
                 },
             };
 
