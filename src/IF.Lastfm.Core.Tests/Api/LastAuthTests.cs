@@ -1,10 +1,10 @@
-﻿using IF.Lastfm.Core.Api;
+using IF.Lastfm.Core.Api;
 using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace IF.Lastfm.Core.Tests.Api
 {
-    
+
     public class LastAuthTests
     {
         private ILastAuth _auth;
@@ -28,7 +28,7 @@ namespace IF.Lastfm.Core.Tests.Api
             const string expectedHash = "41919D4DF853702763556BFE2085406B";
             var actual = _auth.GenerateMethodSignature(method, parameters);
 
-            ClassicAssert.AreEqual(expectedHash, actual);
+            Assert.That(actual, Is.EqualTo(expectedHash));
         }
     }
 }

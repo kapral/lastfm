@@ -13,14 +13,14 @@ namespace IF.Lastfm.Core.Tests
             var testDto1 = now.AddMilliseconds(450);
             var actualDto1 = testDto1.RoundToNearestSecond();
 
-            ClassicAssert.AreEqual(now, actualDto1);
+            Assert.That(actualDto1, Is.EqualTo(now));
             TestHelper.AssertSerialiseEqual(now, actualDto1);
 
             var expectedDto2 = now.AddSeconds(1);
             var testDto2 = now.AddMilliseconds(550);
             var actualDto2 = testDto2.RoundToNearestSecond();
 
-            ClassicAssert.AreEqual(expectedDto2, actualDto2);
+            Assert.That(actualDto2, Is.EqualTo(expectedDto2));
             TestHelper.AssertSerialiseEqual(expectedDto2, actualDto2);
         }
     }

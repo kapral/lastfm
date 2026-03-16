@@ -29,8 +29,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
-            ClassicAssert.IsNotNull(parsed.Content);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
 
             var expectedShouts = new List<LastShout>
             {
@@ -39,11 +39,11 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
                     "Oblivion is the best song on whole album. Maybe i dig it but i don't want to really. Or i'm not in the right mood for it.",
                     "Wed, 17 Sep 2014 21:04:36")
             };
-            
+
             var expectedJson = JsonConvert.SerializeObject(expectedShouts, Formatting.Indented);
             var actualJson = JsonConvert.SerializeObject(parsed.Content, Formatting.Indented);
 
-            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            Assert.That(actualJson, Is.EqualTo(expectedJson), expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -55,9 +55,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
-            ClassicAssert.IsNotNull(parsed.Content);
-            ClassicAssert.IsTrue(parsed.Content.Count() == 1);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(parsed.Content.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -69,9 +69,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
-            ClassicAssert.IsNotNull(parsed.Content);
-            ClassicAssert.IsTrue(!parsed.Content.Any());
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(!parsed.Content.Any());
         }
 
         [Test]
@@ -83,10 +83,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsFalse(parsed.Success);
-            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
-            ClassicAssert.IsNotNull(parsed.Content);
-            ClassicAssert.IsTrue(!parsed.Content.Any());
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(!parsed.Content.Any());
         }
     }
 }

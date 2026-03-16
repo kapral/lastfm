@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,12 +70,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsSingle));
             var parsed = await command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
-            ClassicAssert.AreEqual(1, parsed.Page);
-            ClassicAssert.AreEqual(1, parsed.PageSize);
-            ClassicAssert.AreEqual(1124, parsed.TotalItems);
-            ClassicAssert.AreEqual(1124, parsed.TotalPages);
-            ClassicAssert.AreEqual(1, parsed.Content.Count);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Page, Is.EqualTo(1));
+            Assert.That(parsed.PageSize, Is.EqualTo(1));
+            Assert.That(parsed.TotalItems, Is.EqualTo(1124));
+            Assert.That(parsed.TotalPages, Is.EqualTo(1124));
+            Assert.That(parsed.Content.Count, Is.EqualTo(1));
 
             var actualArtist = parsed.Content.First();
 
@@ -128,12 +128,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsMultiple));
             var parsed = await command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
-            ClassicAssert.AreEqual(1, parsed.Page);
-            ClassicAssert.AreEqual(2, parsed.PageSize);
-            ClassicAssert.AreEqual(1124, parsed.TotalItems);
-            ClassicAssert.AreEqual(562, parsed.TotalPages);
-            ClassicAssert.AreEqual(2, parsed.Content.Count);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Page, Is.EqualTo(1));
+            Assert.That(parsed.PageSize, Is.EqualTo(2));
+            Assert.That(parsed.TotalItems, Is.EqualTo(1124));
+            Assert.That(parsed.TotalPages, Is.EqualTo(562));
+            Assert.That(parsed.Content.Count, Is.EqualTo(2));
 
             var actualArtists = parsed.Content;
 
@@ -157,12 +157,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsEmpty));
             var parsed = await command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
-            ClassicAssert.AreEqual(1, parsed.Page);
-            ClassicAssert.AreEqual(0, parsed.PageSize);
-            ClassicAssert.AreEqual(0, parsed.TotalItems);
-            ClassicAssert.AreEqual(1, parsed.TotalPages);
-            ClassicAssert.AreEqual(0, parsed.Content.Count);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Page, Is.EqualTo(1));
+            Assert.That(parsed.PageSize, Is.EqualTo(0));
+            Assert.That(parsed.TotalItems, Is.EqualTo(0));
+            Assert.That(parsed.TotalPages, Is.EqualTo(1));
+            Assert.That(parsed.Content.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -181,13 +181,13 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsError));
             var parsed = await command.HandleResponse(response);
 
-            ClassicAssert.IsFalse(parsed.Success);
-            ClassicAssert.AreEqual(1, parsed.Page);
-            ClassicAssert.AreEqual(0, parsed.PageSize);
-            ClassicAssert.AreEqual(0, parsed.TotalItems);
-            ClassicAssert.AreEqual(1, parsed.TotalPages);
-            ClassicAssert.AreEqual(0, parsed.Content.Count);
-            ClassicAssert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Page, Is.EqualTo(1));
+            Assert.That(parsed.PageSize, Is.EqualTo(0));
+            Assert.That(parsed.TotalItems, Is.EqualTo(0));
+            Assert.That(parsed.TotalPages, Is.EqualTo(1));
+            Assert.That(parsed.Content.Count, Is.EqualTo(0));
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }

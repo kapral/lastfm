@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace IF.Lastfm.Core.Tests.Api.Commands
 {
-    
+
     public class UserGetRecommendedArtistsCommandTests : CommandTestsBase
     {
         private GetRecommendedArtistsCommand _commmand;
@@ -39,13 +39,13 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var response = CreateResponseMessage(file);
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetRecommendedArtistsSingle));
             var parsed = await _commmand.HandleResponse(response);
-            
-            ClassicAssert.IsTrue(parsed.Success);
+
+            Assert.That(parsed.Success);
 
             var expectedJson = expectedArtist.WrapEnumerable().TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            Assert.That(actualJson, Is.EqualTo(expectedJson), expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -93,12 +93,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetRecommendedArtistsMultiple));
             var parsed = await _commmand.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
+            Assert.That(parsed.Success);
 
             var expectedJson = expectedArtists.TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            Assert.That(actualJson, Is.EqualTo(expectedJson), expectedJson.DifferencesTo(actualJson));
         }
     }
 }

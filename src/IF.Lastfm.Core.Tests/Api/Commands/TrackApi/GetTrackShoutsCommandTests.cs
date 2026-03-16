@@ -1,4 +1,4 @@
-﻿using IF.Lastfm.Core.Api.Enums;
+using IF.Lastfm.Core.Api.Enums;
 using IF.Lastfm.Core.Tests.Resources;
 using NUnit.Framework;
 using System.Linq;
@@ -8,7 +8,7 @@ using IF.Lastfm.Core.Api.Commands.Track;
 
 namespace IF.Lastfm.Core.Tests.Api.Commands.TrackApi
 {
-    
+
     public class GetTrackShoutsCommandTests : CommandTestsBase
     {
         private GetShoutsCommand _command;
@@ -28,14 +28,14 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.TrackApi
         [Test]
         public void Constructor()
         {
-            ClassicAssert.AreEqual(_command.Method, "track.getShouts");
+            Assert.That(_command.Method, Is.EqualTo("track.getShouts"));
 
-            ClassicAssert.AreEqual(_command.Parameters["track"], "Genesis");
-            ClassicAssert.AreEqual(_command.Parameters["artist"], "Grimes");
-            ClassicAssert.AreEqual(_command.Parameters["autocorrect"], "1");
-            ClassicAssert.AreEqual(_command.Parameters["page"], "5");
-            ClassicAssert.AreEqual(_command.Parameters["limit"], "7");
-            //ClassicAssert.AreEqual(_command.Parameters["disablecachetoken"], "1");
+            Assert.That(_command.Parameters["track"], Is.EqualTo("Genesis"));
+            Assert.That(_command.Parameters["artist"], Is.EqualTo("Grimes"));
+            Assert.That(_command.Parameters["autocorrect"], Is.EqualTo("1"));
+            Assert.That(_command.Parameters["page"], Is.EqualTo("5"));
+            Assert.That(_command.Parameters["limit"], Is.EqualTo("7"));
+            //Assert.That(_command.Parameters["disablecachetoken"], Is.EqualTo("1"));
         }
 
         [Test]
@@ -47,10 +47,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.TrackApi
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
-            ClassicAssert.IsNotNull(parsed.Content);
-            ClassicAssert.IsTrue(parsed.Page == 5);
-            ClassicAssert.IsTrue(parsed.Content.Count() == 7);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(parsed.Page, Is.EqualTo(5));
+            Assert.That(parsed.Content.Count(), Is.EqualTo(7));
         }
 
         [Test]
@@ -62,9 +62,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.TrackApi
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
-            ClassicAssert.IsNotNull(parsed.Content);
-            ClassicAssert.IsTrue(parsed.Content.Count() == 1);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(parsed.Content.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -76,9 +76,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.TrackApi
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
-            ClassicAssert.IsNotNull(parsed.Content);
-            ClassicAssert.IsTrue(!parsed.Content.Any());
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(!parsed.Content.Any());
         }
 
         [Test]
@@ -90,10 +90,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.TrackApi
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsFalse(parsed.Success);
-            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
-            ClassicAssert.IsNotNull(parsed.Content);
-            ClassicAssert.IsTrue(!parsed.Content.Any());
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(!parsed.Content.Any());
         }
     }
 }
