@@ -50,8 +50,6 @@ namespace IF.Lastfm.Core.Objects
         public IEnumerable<LastTag> Tags { get; set; }
         public List<LastArtist> Similar { get; set; }
 
-        [Obsolete("As of May 2019 Last.fm no longer returns artist imagery via the API. More info https://www.reddit.com/r/lastfm/comments/bjwcqh/api_announcement_lastfm_support_community/")]
-        public LastImageSet MainImage { get; set; }
         public int? PlayCount { get; set; }
         public LastStats Stats { get; set; }
 
@@ -110,13 +108,6 @@ namespace IF.Lastfm.Core.Objects
                         ? tagToken.Children().Select(token1 => LastTag.ParseJToken(token1))
                         : new List<LastTag> { LastTag.ParseJToken(tagToken) };
                 }
-            }
-
-            var images = token.SelectToken("image");
-            if (images != null && images.HasValues)
-            {
-                var imageCollection = LastImageSet.ParseJToken(images);
-                a.MainImage = imageCollection;
             }
 
             var similarToken = token.SelectToken("similar");

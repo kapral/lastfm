@@ -34,7 +34,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
             var expectedTags = expectedTagNames.Select(tag => new LastTag
             {
                 Name = tag,
-                Url = new Uri(String.Format("http://www.last.fm/tag/{0}", Uri.EscapeUriString(tag))),
+                Url = new Uri($"http://www.last.fm/tag/{Uri.EscapeDataString(tag)}"),
                 RelatedTo = tagName,
                 Streamable = true
             }).ToList();

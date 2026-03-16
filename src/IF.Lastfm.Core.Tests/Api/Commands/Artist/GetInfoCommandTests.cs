@@ -31,64 +31,33 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
                 Name = "Frightened Rabbit",
                 Mbid = "dc21d171-7204-4759-9fd0-77d031aeb40c",
                 Url = new Uri("http://www.last.fm/music/Frightened+Rabbit"),
-                MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/50340089.jpg",
-                    "http://userserve-ak.last.fm/serve/64/50340089.jpg",
-                    "http://userserve-ak.last.fm/serve/126/50340089.jpg",
-                    "http://userserve-ak.last.fm/serve/252/50340089.jpg",
-                    "http://userserve-ak.last.fm/serve/_/50340089/Frightened+Rabbit+frabbit.jpg"),
-                    // todo streamable
-                    OnTour = false,
+                OnTour = false,
                 Similar = new List<LastArtist>
                 {
                     new LastArtist
                     {
                         Name = "Admiral Fallow",
-                        Url = new Uri("http://www.last.fm/music/Admiral+Fallow"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/48454975.jpg",
-                            "http://userserve-ak.last.fm/serve/64/48454975.jpg",
-                            "http://userserve-ak.last.fm/serve/126/48454975.jpg",
-                            "http://userserve-ak.last.fm/serve/252/48454975.jpg",
-                            "http://userserve-ak.last.fm/serve/500/48454975/Admiral+Fallow+l_1185fb2755064ccfbab2871ecec8.jpg")
+                        Url = new Uri("http://www.last.fm/music/Admiral+Fallow")
                     },
                     new LastArtist
                     {
                         Name = "The Twilight Sad",
                         Url = new Uri("http://www.last.fm/music/The+Twilight+Sad"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/18201771.jpg",
-                            "http://userserve-ak.last.fm/serve/64/18201771.jpg",
-                            "http://userserve-ak.last.fm/serve/126/18201771.jpg",
-                            "http://userserve-ak.last.fm/serve/252/18201771.jpg",
-                            "http://userserve-ak.last.fm/serve/500/18201771/The+Twilight+Sad+hi+how+are+you.jpg"),
                     },
                     new LastArtist
                     {
                         Name = "Owl John",
                         Url = new Uri("http://www.last.fm/music/Owl+John"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/101981791.png",
-                            "http://userserve-ak.last.fm/serve/64/101981791.png",
-                            "http://userserve-ak.last.fm/serve/126/101981791.png",
-                            "http://userserve-ak.last.fm/serve/252/101981791.png",
-                            "http://userserve-ak.last.fm/serve/500/101981791/Owl+John+owl.png"),
                     },
                     new LastArtist
                     {
                         Name = "We Were Promised Jetpacks",
                         Url = new Uri("http://www.last.fm/music/We+Were+Promised+Jetpacks"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/53527397.jpg",
-                            "http://userserve-ak.last.fm/serve/64/53527397.jpg",
-                            "http://userserve-ak.last.fm/serve/126/53527397.jpg",
-                            "http://userserve-ak.last.fm/serve/252/53527397.jpg",
-                            "http://userserve-ak.last.fm/serve/_/53527397/We+Were+Promised+Jetpacks+wwpj.jpg"),
                     },
                     new LastArtist
                     {
                         Name = "Meursault",
                         Url = new Uri("http://www.last.fm/music/Meursault"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/41921789.jpg",
-                            "http://userserve-ak.last.fm/serve/64/41921789.jpg",
-                            "http://userserve-ak.last.fm/serve/126/41921789.jpg",
-                            "http://userserve-ak.last.fm/serve/252/41921789.jpg",
-                            "http://userserve-ak.last.fm/serve/_/41921789/Meursault+lovely+fuckwits.jpg"),
                     }
                 },
                 Tags = new List<LastTag>
