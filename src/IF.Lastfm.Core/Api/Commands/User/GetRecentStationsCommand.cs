@@ -39,7 +39,7 @@ namespace IF.Lastfm.Core.Api.Commands.User
 
                 var stations = stationsToken.Children().Select(LastStation.ParseJToken).ToList();
 
-                var pageresponse = PageResponse<LastStation>.CreateSuccessResponse(stations);
+                var pageresponse = new PageResponse<LastStation>(stations);
 
                 var attrToken = jtoken.SelectToken("@attr");
                 pageresponse.AddPageInfoFromJToken(attrToken);

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Lastream.Lastfm</PackageId>
-    <VersionPrefix>1.0.0</VersionPrefix> <!-- https://stackoverflow.com/a/42615574/268555 -->
+    <VersionPrefix>1.0.1</VersionPrefix> <!-- https://stackoverflow.com/a/42615574/268555 -->
 
     <Title>Lastream Last.fm SDK</Title>
     <Description>Last.fm SDK for modern .NET platforms. Maintained fork of Inflatable.Lastfm.</Description>

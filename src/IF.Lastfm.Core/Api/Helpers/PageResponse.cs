@@ -36,6 +36,7 @@ namespace IF.Lastfm.Core.Api.Helpers
 
         public PageResponse(IEnumerable<T> content)
         {
+            Status = LastResponseStatus.Successful;
             Page = 1;
             TotalPages = 1;
             Content = new ReadOnlyCollection<T>(content.ToList());
@@ -92,9 +93,7 @@ namespace IF.Lastfm.Core.Api.Helpers
 
         internal static PageResponse<T> CreateErrorResponse(string json, HttpResponseMessage httpResponse)
         {
-            LastResponseStatus status;
-            string message;
-            LastFm.IsResponseValid(json, out status, out message);
+            LastFm.IsResponseValid(json, out var status, out var message);
             var r = new PageResponse<T>
             {
                 Status = status,
@@ -117,17 +116,6 @@ namespace IF.Lastfm.Core.Api.Helpers
 
             r.AddDefaultPageInfo();
 
-            return r;
-        }
-
-        [Obsolete]
-        public static PageResponse<T> CreateSuccessResponse(IEnumerable<T> content)
-        {
-            var r = new PageResponse<T>(content)
-            {
-                Status = LastResponseStatus.Successful
-            };
-            
             return r;
         }
 
@@ -162,7 +150,7 @@ namespace IF.Lastfm.Core.Api.Helpers
 
             return items;
         }
-        
+
         public static PageResponse<T> CreateSuccessResponse(JToken itemsToken, JToken pageInfoToken, Func<JToken, T> parseToken, LastPageResultsType pageResultsType)
         {
             var items = ParseItemsToken(itemsToken, parseToken);
