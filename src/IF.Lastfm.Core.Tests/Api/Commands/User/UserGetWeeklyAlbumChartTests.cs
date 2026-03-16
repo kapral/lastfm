@@ -73,8 +73,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var response = CreateResponseMessage(file);
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsTrue(parsed.Content.Count == 0);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Content.Count == 0);
         }
 
         [Test]
@@ -97,14 +97,14 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             };
 
             //General tests
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(175, parsed.Content.Count);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.AreEqual(175, parsed.Content.Count);
 
             //Test values of first album
             var expectedJson = JsonConvert.SerializeObject(expectedFirst, Formatting.Indented);
             var actualJson = JsonConvert.SerializeObject(first, Formatting.Indented);
 
-            Assert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
         }
 
     }

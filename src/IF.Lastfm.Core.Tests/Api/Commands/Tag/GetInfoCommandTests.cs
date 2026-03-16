@@ -37,11 +37,11 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
             var tag = lastResponse.Content;
 
             //Assert
-            Assert.IsTrue(lastResponse.Success);
-            Assert.AreEqual(expectedTag.Reach,tag.Reach);
-            Assert.AreEqual(expectedTag.Name, tag.Name);
-            Assert.AreEqual(expectedTag.Count, tag.Count);
-            Assert.AreEqual(expectedTag.Streamable, tag.Streamable);
+            ClassicAssert.IsTrue(lastResponse.Success);
+            ClassicAssert.AreEqual(expectedTag.Reach,tag.Reach);
+            ClassicAssert.AreEqual(expectedTag.Name, tag.Name);
+            ClassicAssert.AreEqual(expectedTag.Count, tag.Count);
+            ClassicAssert.AreEqual(expectedTag.Streamable, tag.Streamable);
         }
 
         [Test]
@@ -55,8 +55,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
 
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
         }
     }
 }

@@ -70,12 +70,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsSingle));
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(1, parsed.Page);
-            Assert.AreEqual(1, parsed.PageSize);
-            Assert.AreEqual(1124, parsed.TotalItems);
-            Assert.AreEqual(1124, parsed.TotalPages);
-            Assert.AreEqual(1, parsed.Content.Count);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.AreEqual(1, parsed.Page);
+            ClassicAssert.AreEqual(1, parsed.PageSize);
+            ClassicAssert.AreEqual(1124, parsed.TotalItems);
+            ClassicAssert.AreEqual(1124, parsed.TotalPages);
+            ClassicAssert.AreEqual(1, parsed.Content.Count);
 
             var actualArtist = parsed.Content.First();
 
@@ -128,12 +128,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsMultiple));
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(1, parsed.Page);
-            Assert.AreEqual(2, parsed.PageSize);
-            Assert.AreEqual(1124, parsed.TotalItems);
-            Assert.AreEqual(562, parsed.TotalPages);
-            Assert.AreEqual(2, parsed.Content.Count);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.AreEqual(1, parsed.Page);
+            ClassicAssert.AreEqual(2, parsed.PageSize);
+            ClassicAssert.AreEqual(1124, parsed.TotalItems);
+            ClassicAssert.AreEqual(562, parsed.TotalPages);
+            ClassicAssert.AreEqual(2, parsed.Content.Count);
 
             var actualArtists = parsed.Content;
 
@@ -157,12 +157,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsEmpty));
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(1, parsed.Page);
-            Assert.AreEqual(0, parsed.PageSize);
-            Assert.AreEqual(0, parsed.TotalItems);
-            Assert.AreEqual(1, parsed.TotalPages);
-            Assert.AreEqual(0, parsed.Content.Count);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.AreEqual(1, parsed.Page);
+            ClassicAssert.AreEqual(0, parsed.PageSize);
+            ClassicAssert.AreEqual(0, parsed.TotalItems);
+            ClassicAssert.AreEqual(1, parsed.TotalPages);
+            ClassicAssert.AreEqual(0, parsed.Content.Count);
         }
 
         [Test]
@@ -181,13 +181,13 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsError));
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.AreEqual(1, parsed.Page);
-            Assert.AreEqual(0, parsed.PageSize);
-            Assert.AreEqual(0, parsed.TotalItems);
-            Assert.AreEqual(1, parsed.TotalPages);
-            Assert.AreEqual(0, parsed.Content.Count);
-            Assert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.AreEqual(1, parsed.Page);
+            ClassicAssert.AreEqual(0, parsed.PageSize);
+            ClassicAssert.AreEqual(0, parsed.TotalItems);
+            ClassicAssert.AreEqual(1, parsed.TotalPages);
+            ClassicAssert.AreEqual(0, parsed.Content.Count);
+            ClassicAssert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
         }
     }
 }

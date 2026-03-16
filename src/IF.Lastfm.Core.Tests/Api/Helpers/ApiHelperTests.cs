@@ -25,7 +25,7 @@ namespace IF.Lastfm.Core.Tests.Api.Helpers
             var expected = "dogs";
             var actual = enumValue.GetApiName();
 
-            Assert.AreEqual(expected, actual);
+            ClassicAssert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace IF.Lastfm.Core.Tests.Api.Helpers
             var expected = "Unknown";
             var actual = enumValue.GetApiName();
 
-            Assert.AreEqual(expected, actual);
+            ClassicAssert.AreEqual(expected, actual);
         }
     }
 }

@@ -33,19 +33,19 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
         {   
             _commandArtist.SetParameters();
             string artistValue;
-            Assert.IsTrue(_commandArtist.Parameters.TryGetValue("artist", out artistValue));
-            Assert.AreEqual("Steely Dan", artistValue);
+            ClassicAssert.IsTrue(_commandArtist.Parameters.TryGetValue("artist", out artistValue));
+            ClassicAssert.AreEqual("Steely Dan", artistValue);
 
             var file = GetFileContents("ArtistApi.ArtistGetTopAlbumsSuccess.json");
             var response = CreateResponseMessage(file);
             var parsed = await _commandArtist.HandleResponse(response);
             
-            Assert.IsTrue(parsed.Success, "parsed.success should be true");
-            Assert.AreEqual(10, parsed.Content.Count);
-            Assert.AreEqual(10, parsed.PageSize);
-            Assert.AreEqual(16897, parsed.TotalItems);
-            Assert.AreEqual(1690, parsed.TotalPages);
-            Assert.AreEqual("Steely Dan", parsed.Content[0].ArtistName);
+            ClassicAssert.IsTrue(parsed.Success, "parsed.success should be true");
+            ClassicAssert.AreEqual(10, parsed.Content.Count);
+            ClassicAssert.AreEqual(10, parsed.PageSize);
+            ClassicAssert.AreEqual(16897, parsed.TotalItems);
+            ClassicAssert.AreEqual(1690, parsed.TotalPages);
+            ClassicAssert.AreEqual("Steely Dan", parsed.Content[0].ArtistName);
         }
 
         [Test]
@@ -53,8 +53,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
         {
             _commandMbid.SetParameters();
             string mbidValue;
-            Assert.IsTrue(_commandMbid.Parameters.TryGetValue("mbid", out mbidValue));
-            Assert.AreEqual("e01c3376-15fa-40d7-b747-5f219bdefdd7", mbidValue);
+            ClassicAssert.IsTrue(_commandMbid.Parameters.TryGetValue("mbid", out mbidValue));
+            ClassicAssert.AreEqual("e01c3376-15fa-40d7-b747-5f219bdefdd7", mbidValue);
         }
         
         [Test]
@@ -65,8 +65,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
             
             var parsed = await _commandArtist.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success, "parsed.success should be false");
-            Assert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
+            ClassicAssert.IsFalse(parsed.Success, "parsed.success should be false");
+            ClassicAssert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
         }
     }
 }

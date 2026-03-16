@@ -26,9 +26,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
         [Test]
         public void Constructor()
         {
-            Assert.AreEqual(_command.Method, "album.getTopTags");
-            Assert.AreEqual(_command.Parameters["album"], "Believe");
-            Assert.AreEqual(_command.Parameters["artist"], "Cher");
+            ClassicAssert.AreEqual(_command.Method, "album.getTopTags");
+            ClassicAssert.AreEqual(_command.Parameters["album"], "Believe");
+            ClassicAssert.AreEqual(_command.Parameters["artist"], "Cher");
         }
 
         [Test]
@@ -40,8 +40,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.IsNotNull(parsed.Content);
         }
 
         [Test]
@@ -53,9 +53,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(!parsed.Content.Any());
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.IsNotNull(parsed.Content);
+            ClassicAssert.IsTrue(!parsed.Content.Any());
         }
 
         [Test]
@@ -67,10 +67,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(!parsed.Content.Any());
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            ClassicAssert.IsNotNull(parsed.Content);
+            ClassicAssert.IsTrue(!parsed.Content.Any());
         }
     }
 }

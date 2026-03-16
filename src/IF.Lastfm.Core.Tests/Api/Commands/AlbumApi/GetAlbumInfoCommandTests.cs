@@ -67,16 +67,16 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(AlbumApiResponses.AlbumGetInfoSuccess));
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Success);
 
             var actual = parsed.Content;
-            Assert.IsTrue(actual.Tracks.Count() == 13);
+            ClassicAssert.IsTrue(actual.Tracks.Count() == 13);
             actual.Tracks = null;
 
             var expectedJson = expectedAlbum.TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            Assert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -127,16 +127,16 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(AlbumApiResponses.AlbumGetInfoForUser));
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Success);
 
             var actual = parsed.Content;
-            Assert.IsTrue(actual.Tracks.Count() == 13);
+            ClassicAssert.IsTrue(actual.Tracks.Count() == 13);
             actual.Tracks = null;
 
             var expectedJson = expectedAlbum.TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            Assert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -148,8 +148,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
         }
     }
 }

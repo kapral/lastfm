@@ -60,7 +60,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var http = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopAlbumsError));
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
+            ClassicAssert.IsFalse(parsed.Success);
         }
 
         [Test]
@@ -71,10 +71,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var http = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopAlbumsEmpty));
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsTrue(!parsed.Content.Any());
-            Assert.AreEqual(0, parsed.TotalItems);
-            Assert.AreEqual(1, parsed.TotalPages);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.IsTrue(!parsed.Content.Any());
+            ClassicAssert.AreEqual(0, parsed.TotalItems);
+            ClassicAssert.AreEqual(1, parsed.TotalPages);
         }
 
         [Test]
@@ -104,8 +104,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var http = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopAlbumsSingle));
             var parsed = await _command.HandleResponse(response);
             
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(1, parsed.Content.Count);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.AreEqual(1, parsed.Content.Count);
 
             var actualAlbum = parsed.Content.First();
             
@@ -118,8 +118,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var file = GetFileContents("UserApi.UserGetTopAlbumsMultiple.json");
             var response = CreateResponseMessage(file);
             var parsed = await _command.HandleResponse(response);
-            Assert.IsTrue(response.IsSuccessStatusCode);
-            Assert.AreEqual(3, parsed.Content.Count);
+            ClassicAssert.IsTrue(response.IsSuccessStatusCode);
+            ClassicAssert.AreEqual(3, parsed.Content.Count);
         }
     }
 }

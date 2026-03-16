@@ -47,9 +47,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(TagApiResponses.GetSimilarSuccess));
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Skip(2).All(t => t.Streamable.GetValueOrDefault()));
-            Assert.IsTrue(actual.All(t => t.RelatedTo == tagName));
-            Assert.IsTrue(actual.Success);
+            ClassicAssert.IsTrue(actual.Skip(2).All(t => t.Streamable.GetValueOrDefault()));
+            ClassicAssert.IsTrue(actual.All(t => t.RelatedTo == tagName));
+            ClassicAssert.IsTrue(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTags, actual.ToList());
         }
         
@@ -64,8 +64,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
 
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
         }
     }
 }

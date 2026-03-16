@@ -45,7 +45,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Library
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(LibraryApiResponses.LibraryGetTracksMultiple));
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            ClassicAssert.IsTrue(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Content[1]); // Testing the second track returned
         }
 
@@ -80,7 +80,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Library
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(LibraryApiResponses.LibraryGetTracksSingle));
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            ClassicAssert.IsTrue(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Single());
         }
         
@@ -98,8 +98,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Library
 
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace IF.Lastfm.Core.Tests.Api
 
             var commandsWithoutAttribute = allCommands.Where(x => !x.GetCustomAttributes<ApiMethodNameAttribute>().Any());
 
-            Assert.IsFalse(commandsWithoutAttribute.Any(), "Warning, all commands should have anApiMethodNameAttribute.");
+            ClassicAssert.IsFalse(commandsWithoutAttribute.Any(), "Warning, all commands should have anApiMethodNameAttribute.");
         }
     }
 }

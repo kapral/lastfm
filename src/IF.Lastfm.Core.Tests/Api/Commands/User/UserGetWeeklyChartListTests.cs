@@ -54,8 +54,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var response = CreateResponseMessage(file);
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
         }
 
         [Test]
@@ -65,16 +65,16 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var response = CreateResponseMessage(file);
             var parsed = await _command.HandleResponse(response);
             
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(612, parsed.Content.Count);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.AreEqual(612, parsed.Content.Count);
 
             //convert dates back to unix time
             var lastPeriod = parsed.Content.Last();
 
-            Assert.AreEqual("1546171200", lastPeriod.From.ToString());
-            Assert.AreEqual("1546776000", lastPeriod.To.ToString());
-            Assert.AreEqual(new DateTime(2018,12,30,12,0,0), lastPeriod.FromDate);
-            Assert.AreEqual(new DateTime(2019,1,6,12,0,0), lastPeriod.ToDate);
+            ClassicAssert.AreEqual("1546171200", lastPeriod.From.ToString());
+            ClassicAssert.AreEqual("1546776000", lastPeriod.To.ToString());
+            ClassicAssert.AreEqual(new DateTime(2018,12,30,12,0,0), lastPeriod.FromDate);
+            ClassicAssert.AreEqual(new DateTime(2019,1,6,12,0,0), lastPeriod.ToDate);
         }
 
     }
