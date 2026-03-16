@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
   </ItemGroup>
 
   <ItemGroup>
