@@ -23,7 +23,7 @@ namespace IF.Lastfm.Core.Tests
                     {"blue", "performance"}
                 }, true);
 
-            Assert.AreEqual(expected, actual);
+            ClassicAssert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -31,23 +31,23 @@ namespace IF.Lastfm.Core.Tests
         {
             LastResponseStatus status;
 
-            Assert.IsFalse(LastFm.IsResponseValid(null, out status));
-            Assert.IsFalse(LastFm.IsResponseValid("{invalid json", out status));
+            ClassicAssert.IsFalse(LastFm.IsResponseValid(null, out status));
+            ClassicAssert.IsFalse(LastFm.IsResponseValid("{invalid json", out status));
 
             var error6 = GetFileContents("ArtistApi.ArtistGetTagsError.json");
             //var error6 = Encoding.UTF8.GetString(ArtistApiResponses.ArtistGetTagsError);
-            Assert.IsFalse(LastFm.IsResponseValid(error6, out status));
-            Assert.AreEqual(LastResponseStatus.MissingParameters, status);
+            ClassicAssert.IsFalse(LastFm.IsResponseValid(error6, out status));
+            ClassicAssert.AreEqual(LastResponseStatus.MissingParameters, status);
 
             string message;
-            Assert.IsFalse(LastFm.IsResponseValid(error6, out status, out message));
-            Assert.AreEqual(LastResponseStatus.MissingParameters, status);
-            Assert.AreEqual("Invalid user supplied", message);
+            ClassicAssert.IsFalse(LastFm.IsResponseValid(error6, out status, out message));
+            ClassicAssert.AreEqual(LastResponseStatus.MissingParameters, status);
+            ClassicAssert.AreEqual("Invalid user supplied", message);
 
             var goodResponse = GetFileContents("ArtistApi.ArtistGetInfoSuccess.json");
             //var goodResponse = Encoding.UTF8.GetString(ArtistApiResponses.ArtistGetInfoSuccess);
-            Assert.IsTrue(LastFm.IsResponseValid(goodResponse, out status));
-            Assert.AreEqual(LastResponseStatus.Successful, status);
+            ClassicAssert.IsTrue(LastFm.IsResponseValid(goodResponse, out status));
+            ClassicAssert.AreEqual(LastResponseStatus.Successful, status);
         }
 
         protected string GetFileContents(string sampleFile)

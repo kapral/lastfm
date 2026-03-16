@@ -39,7 +39,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetRecentTracksMultiple));
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            ClassicAssert.IsTrue(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Content[2]);
         }
 
@@ -73,7 +73,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetRecentTracksSingle));
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            ClassicAssert.IsTrue(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Single());
         }
 
@@ -115,7 +115,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
 
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            ClassicAssert.IsTrue(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Single());
         }
 
@@ -133,8 +133,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
 
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
         }
     }
 }

@@ -40,12 +40,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetRecommendedArtistsSingle));
             var parsed = await _commmand.HandleResponse(response);
             
-            Assert.IsTrue(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Success);
 
             var expectedJson = expectedArtist.WrapEnumerable().TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            Assert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -93,12 +93,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetRecommendedArtistsMultiple));
             var parsed = await _commmand.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Success);
 
             var expectedJson = expectedArtists.TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            Assert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
         }
     }
 }

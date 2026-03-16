@@ -25,8 +25,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
             var parsed = await command.HandleResponse(response);
 
             //Assert
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.IsNotNull(parsed.Content);
         }
 
         [Test]
@@ -42,8 +42,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
             var parsed = await command.HandleResponse(response);
 
             //Assert
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.IsNotNull(parsed.Content);
         }
 
         [Test]
@@ -57,8 +57,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
 
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
         }
     }
 }

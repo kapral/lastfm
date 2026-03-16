@@ -71,8 +71,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var response = CreateResponseMessage(file);
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
         }
 
         [Test]
@@ -83,14 +83,14 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var parsed = await _command.HandleResponse(response);
             var first = parsed.Content.First();
             //General tests
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(20, parsed.Content.Count);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.AreEqual(20, parsed.Content.Count);
 
             //Tests on values being properly set
-            Assert.AreEqual("Bing Crosby", first.Name);
-            Assert.AreEqual("2437980f-513a-44fc-80f1-b90d9d7fcf8f", first.Mbid);
-            Assert.AreEqual(18, first.PlayCount);
-            Assert.AreEqual(new Uri("https://www.last.fm/music/Bing+Crosby"), first.Url); 
+            ClassicAssert.AreEqual("Bing Crosby", first.Name);
+            ClassicAssert.AreEqual("2437980f-513a-44fc-80f1-b90d9d7fcf8f", first.Mbid);
+            ClassicAssert.AreEqual(18, first.PlayCount);
+            ClassicAssert.AreEqual(new Uri("https://www.last.fm/music/Bing+Crosby"), first.Url); 
         }
 
     }

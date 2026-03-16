@@ -118,12 +118,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(ArtistApiResponses.ArtistGetInfoSucess));
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Success);
 
             var expectedJson = expectedArtist.TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            Assert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
         }
         
         [Test]
@@ -139,8 +139,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
             _command2.SetParameters();
             
             string langValue; 
-            Assert.IsTrue(_command2.Parameters.TryGetValue("lang", out langValue));
-            Assert.AreEqual("fr", langValue);
+            ClassicAssert.IsTrue(_command2.Parameters.TryGetValue("lang", out langValue));
+            ClassicAssert.AreEqual("fr", langValue);
         }
 
         [Test]
@@ -152,8 +152,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
         }
     }
 }

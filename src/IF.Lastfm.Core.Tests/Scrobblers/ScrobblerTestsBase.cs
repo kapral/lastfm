@@ -152,7 +152,7 @@ namespace IF.Lastfm.Core.Tests.Scrobblers
             var responseMessage = TestHelper.CreateResponseMessage(HttpStatusCode.OK, "TrackApi.TrackScrobbleSuccess.json");
             var scrobbleResponse = await ExecuteTestInternal(testScrobbles, responseMessage, requestMessage);
 
-            Assert.AreEqual(LastResponseStatus.Successful, scrobbleResponse.Status);
+            ClassicAssert.AreEqual(LastResponseStatus.Successful, scrobbleResponse.Status);
         }
 
         [Test]
@@ -164,7 +164,7 @@ namespace IF.Lastfm.Core.Tests.Scrobblers
             var responseMessage = TestHelper.CreateResponseMessage(HttpStatusCode.OK, "TrackApi.TrackScrobbleSuccess.json");
             var scrobbleResponse = await ExecuteTestInternal(testScrobbles, responseMessage, requestMessage);
 
-            Assert.AreEqual(LastResponseStatus.Successful, scrobbleResponse.Status);
+            ClassicAssert.AreEqual(LastResponseStatus.Successful, scrobbleResponse.Status);
         }
 
         [Test]
@@ -178,11 +178,11 @@ namespace IF.Lastfm.Core.Tests.Scrobblers
 
             var scrobbleResponse1 = await ExecuteTestInternal(scrobblesToCache, responseMessage1);
             
-            Assert.AreEqual(LastResponseStatus.Cached, scrobbleResponse1.Status);
+            ClassicAssert.AreEqual(LastResponseStatus.Cached, scrobbleResponse1.Status);
 
             var cachedTracks1 = await Scrobbler.GetCachedAsync();
             TestHelper.AssertSerialiseEqual(testScrobbles.First(), cachedTracks1.FirstOrDefault());
-            Assert.AreEqual(1, await Scrobbler.GetCachedCountAsync());
+            ClassicAssert.AreEqual(1, await Scrobbler.GetCachedCountAsync());
 
             var scrobblesToSend = testScrobbles.Skip(1).Take(1);
 
@@ -190,13 +190,13 @@ namespace IF.Lastfm.Core.Tests.Scrobblers
             var responseMessage2 = TestHelper.CreateResponseMessage(HttpStatusCode.OK, "TrackApi.TrackScrobbleSuccess2.json");
             var scrobbleResponse2 = await ExecuteTestInternal(scrobblesToSend, responseMessage2, requestMessage2);
 
-            Assert.IsTrue(scrobbleResponse2.Success);
-            Assert.AreEqual(2, scrobbleResponse2.AcceptedCount);
+            ClassicAssert.IsTrue(scrobbleResponse2.Success);
+            ClassicAssert.AreEqual(2, scrobbleResponse2.AcceptedCount);
 
             // Should be nothing left in the cache
             var cachedTracks2 = await Scrobbler.GetCachedAsync();
-            Assert.AreEqual(0, cachedTracks2.Count());
-            Assert.AreEqual(0, await Scrobbler.GetCachedCountAsync());
+            ClassicAssert.AreEqual(0, cachedTracks2.Count());
+            ClassicAssert.AreEqual(0, await Scrobbler.GetCachedCountAsync());
         }
 
         [Test]
@@ -208,7 +208,7 @@ namespace IF.Lastfm.Core.Tests.Scrobblers
             var responseMessage = TestHelper.CreateResponseMessage(HttpStatusCode.Forbidden, "TrackApi.TrackScrobbleBadAuthError.json");
             var scrobbleResponse = await ExecuteTestInternal(testScrobbles, responseMessage, requestMessage);
 
-            Assert.AreEqual(LastResponseStatus.Cached, scrobbleResponse.Status);
+            ClassicAssert.AreEqual(LastResponseStatus.Cached, scrobbleResponse.Status);
 
             // check actually cached
             var cached = await Scrobbler.GetCachedAsync();
@@ -224,7 +224,7 @@ namespace IF.Lastfm.Core.Tests.Scrobblers
             var responseMessage = TestHelper.CreateResponseMessage(HttpStatusCode.RequestTimeout, "");
             var scrobbleResponse = await ExecuteTestInternal(testScrobbles, responseMessage, requestMessage);
 
-            Assert.AreEqual(LastResponseStatus.Cached, scrobbleResponse.Status);
+            ClassicAssert.AreEqual(LastResponseStatus.Cached, scrobbleResponse.Status);
 
             // check actually cached
             var cached = await Scrobbler.GetCachedAsync();

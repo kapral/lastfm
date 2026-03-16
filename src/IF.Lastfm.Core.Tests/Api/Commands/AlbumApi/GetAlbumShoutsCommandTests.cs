@@ -29,8 +29,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.IsNotNull(parsed.Content);
 
             var expectedShouts = new List<LastShout>
             {
@@ -43,7 +43,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
             var expectedJson = JsonConvert.SerializeObject(expectedShouts, Formatting.Indented);
             var actualJson = JsonConvert.SerializeObject(parsed.Content, Formatting.Indented);
 
-            Assert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -55,9 +55,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(parsed.Content.Count() == 1);
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.IsNotNull(parsed.Content);
+            ClassicAssert.IsTrue(parsed.Content.Count() == 1);
         }
 
         [Test]
@@ -69,9 +69,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(!parsed.Content.Any());
+            ClassicAssert.IsTrue(parsed.Success);
+            ClassicAssert.IsNotNull(parsed.Content);
+            ClassicAssert.IsTrue(!parsed.Content.Any());
         }
 
         [Test]
@@ -83,10 +83,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(!parsed.Content.Any());
+            ClassicAssert.IsFalse(parsed.Success);
+            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            ClassicAssert.IsNotNull(parsed.Content);
+            ClassicAssert.IsTrue(!parsed.Content.Any());
         }
     }
 }

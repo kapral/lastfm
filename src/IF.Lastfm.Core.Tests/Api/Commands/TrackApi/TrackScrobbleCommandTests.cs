@@ -57,9 +57,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var responseMessage = CreateResponseMessage(Encoding.UTF8.GetString(TrackApiResponses.TrackScrobbleRejected));
             var response = await _command.HandleResponse(responseMessage) as ScrobbleResponse;
             
-            Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.Ignored.Count());
-            Assert.AreEqual("Artist name failed filter: Various", response.Ignored.First().IgnoredReason);
+            ClassicAssert.IsTrue(response.Success);
+            ClassicAssert.AreEqual(1, response.Ignored.Count());
+            ClassicAssert.AreEqual("Artist name failed filter: Various", response.Ignored.First().IgnoredReason);
         }
 
         [Test]
@@ -70,8 +70,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var responseMessage = CreateResponseMessage(Encoding.UTF8.GetString(TrackApiResponses.TrackScrobbleSuccess));
             var response = await _command.HandleResponse(responseMessage);
             
-            Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.AcceptedCount);
+            ClassicAssert.IsTrue(response.Success);
+            ClassicAssert.AreEqual(1, response.AcceptedCount);
         }
 
         [Test]
@@ -82,8 +82,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var responseMessage = CreateResponseMessage(Encoding.UTF8.GetString(TrackApiResponses.TrackScrobbleSuccessNoAlbumProperty));
             var response = await _command.HandleResponse(responseMessage);
             
-            Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.AcceptedCount);
+            ClassicAssert.IsTrue(response.Success);
+            ClassicAssert.AreEqual(1, response.AcceptedCount);
         }
     }
 }

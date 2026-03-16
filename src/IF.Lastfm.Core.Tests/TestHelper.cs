@@ -99,7 +99,7 @@ namespace IF.Lastfm.Core.Tests
             var ones = one.TestSerialise();
             var twos = two.TestSerialise();
 
-            Assert.AreEqual(ones, twos, ones.DifferencesTo(twos));
+            ClassicAssert.AreEqual(ones, twos, ones.DifferencesTo(twos));
         }
 
         public static string DifferencesTo<T>(this IEnumerable<T> expected, IEnumerable<T> actual)
@@ -192,14 +192,14 @@ namespace IF.Lastfm.Core.Tests
             Func<string, dynamic, string> testMessage =
                 (property, count) => string.Format(messageFormat, json, property, count);
 
-            Assert.IsTrue(pageResponse.Success == success, testMessage("success", success));
-            Assert.IsTrue(pageResponse.TotalItems == totalItems, testMessage("totalitems", totalItems));
-            Assert.IsTrue(pageResponse.PageSize == pageSize, testMessage("pagesize", pageSize));
-            Assert.IsTrue(pageResponse.Page == page, testMessage("page", page));
-            Assert.IsTrue(pageResponse.TotalPages == totalPages, testMessage("totalpages", totalPages));
+            ClassicAssert.IsTrue(pageResponse.Success == success, testMessage("success", success));
+            ClassicAssert.IsTrue(pageResponse.TotalItems == totalItems, testMessage("totalitems", totalItems));
+            ClassicAssert.IsTrue(pageResponse.PageSize == pageSize, testMessage("pagesize", pageSize));
+            ClassicAssert.IsTrue(pageResponse.Page == page, testMessage("page", page));
+            ClassicAssert.IsTrue(pageResponse.TotalPages == totalPages, testMessage("totalpages", totalPages));
 
-            Assert.IsNotNull(pageResponse.Content, "page content is null");
-            Assert.IsTrue(pageResponse.Content.Count == totalItems, testMessage("content length", totalItems));
+            ClassicAssert.IsNotNull(pageResponse.Content, "page content is null");
+            ClassicAssert.IsTrue(pageResponse.Content.Count == totalItems, testMessage("content length", totalItems));
         }
         
         public static HttpResponseMessage CreateResponseMessage(HttpStatusCode status, string resource)
