@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Inflatable Last.fm** — a .NET SDK for the Last.fm REST API. Targets `netstandard1.1` for broad platform compatibility (.NET Core, .NET Framework 4.5.1+, UWP, Xamarin). ~79% of the Last.fm API is implemented; see `PROGRESS.md` for coverage details.
+**Inflatable Last.fm** — a .NET SDK for the Last.fm REST API. Targets `net10.0`. ~79% of the Last.fm API is implemented; see `PROGRESS.md` for coverage details.
 
 ## Commands
 
@@ -25,7 +25,7 @@ dotnet test src/IF.Lastfm.Core.Tests/IF.Lastfm.Core.Tests.csproj
 dotnet pack -c Release --no-build --include-source -o ./tmp IF.Lastfm.sln
 ```
 
-CI uses .NET 6.0. The `release` branch triggers publishing to nuget.org.
+CI uses .NET 10.0. The `release` branch triggers publishing to nuget.org.
 
 ## Architecture
 
@@ -71,6 +71,3 @@ JSON deserialization uses Newtonsoft.Json via contract types in `src/IF.Lastfm.C
 
 When writing tests, use embedded JSON fixtures (real API responses) rather than constructing objects manually. Follow the pattern in existing test classes for the module you are working on.
 
-### Syro Developer Tool
-
-`src/IF.Lastfm.Syro/` is a WPF GUI app (.NET 4.6.2) used to interactively test API methods and generate `PROGRESS.md`. Not part of the main solution (`IF.Lastfm.sln`) — use `IF.Lastfm.Testing.sln` to include it.
