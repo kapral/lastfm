@@ -1,4 +1,4 @@
-﻿using IF.Lastfm.Core.Api.Helpers;
+using IF.Lastfm.Core.Api.Helpers;
 using NUnit.Framework;
 
 namespace IF.Lastfm.Core.Tests.Api.Helpers
@@ -14,7 +14,7 @@ namespace IF.Lastfm.Core.Tests.Api.Helpers
         Cats
     }
 
-    
+
     public class ApiHelperTests
     {
         [Test]
@@ -25,7 +25,7 @@ namespace IF.Lastfm.Core.Tests.Api.Helpers
             var expected = "dogs";
             var actual = enumValue.GetApiName();
 
-            ClassicAssert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace IF.Lastfm.Core.Tests.Api.Helpers
             var expected = "Unknown";
             var actual = enumValue.GetApiName();
 
-            ClassicAssert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }

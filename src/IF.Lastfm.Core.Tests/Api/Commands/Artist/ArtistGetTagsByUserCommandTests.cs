@@ -37,7 +37,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var actualJson = parsed.Content.TestSerialise();
 
             parsed.AssertValues(true, 1, 1, 1, 1);
-            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            Assert.That(actualJson, Is.EqualTo(expectedJson), expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var actualJson = parsed.Content.TestSerialise();
 
             parsed.AssertValues(true, 2, 2, 1, 1);
-            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            Assert.That(actualJson, Is.EqualTo(expectedJson), expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var parsed = await _command.HandleResponse(response);
 
             parsed.AssertValues(true, 0, 0, 1, 1);
-            ClassicAssert.IsTrue(!parsed.Content.Any());
+            Assert.That(!parsed.Content.Any());
         }
 
         [Test]
@@ -82,9 +82,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var parsed = await _command.HandleResponse(response);
 
             parsed.AssertValues(false, 0, 0, 1, 1);
-            ClassicAssert.IsFalse(parsed.Success);
-            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
-            ClassicAssert.IsTrue(!parsed.Content.Any());
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
+            Assert.That(!parsed.Content.Any());
         }
     }
 }

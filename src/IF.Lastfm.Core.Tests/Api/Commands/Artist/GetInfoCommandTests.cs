@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,20 +112,20 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
                     Plays = 0
                 }
             };
-            
+
             var file = GetFileContents("ArtistApi.ArtistGetInfoSuccess.json");
             var response = CreateResponseMessage(file);
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(ArtistApiResponses.ArtistGetInfoSucess));
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
+            Assert.That(parsed.Success);
 
             var expectedJson = expectedArtist.TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            Assert.That(actualJson, Is.EqualTo(expectedJson), expectedJson.DifferencesTo(actualJson));
         }
-        
+
         [Test]
         public void ArtistGetInfo_SetLangParam_Success()
         {
@@ -134,13 +134,13 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
                 ArtistName = "Frightened Rabbit",
                 BioLanguage = "fr"
             };
-            
+
             //call the commands SetParameter method - this is ususally done in Command.ExecuteAsync
             _command2.SetParameters();
-            
-            string langValue; 
-            ClassicAssert.IsTrue(_command2.Parameters.TryGetValue("lang", out langValue));
-            ClassicAssert.AreEqual("fr", langValue);
+
+            string langValue;
+            Assert.That(_command2.Parameters.TryGetValue("lang", out langValue));
+            Assert.That(langValue, Is.EqualTo("fr"));
         }
 
         [Test]
@@ -152,8 +152,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsFalse(parsed.Success);
-            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }

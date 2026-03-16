@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using IF.Lastfm.Core.Api.Enums;
@@ -67,16 +67,16 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(AlbumApiResponses.AlbumGetInfoSuccess));
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
+            Assert.That(parsed.Success);
 
             var actual = parsed.Content;
-            ClassicAssert.IsTrue(actual.Tracks.Count() == 13);
+            Assert.That(actual.Tracks.Count(), Is.EqualTo(13));
             actual.Tracks = null;
 
             var expectedJson = expectedAlbum.TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            Assert.That(actualJson, Is.EqualTo(expectedJson), expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -127,16 +127,16 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(AlbumApiResponses.AlbumGetInfoForUser));
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(parsed.Success);
+            Assert.That(parsed.Success);
 
             var actual = parsed.Content;
-            ClassicAssert.IsTrue(actual.Tracks.Count() == 13);
+            Assert.That(actual.Tracks.Count(), Is.EqualTo(13));
             actual.Tracks = null;
 
             var expectedJson = expectedAlbum.TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            ClassicAssert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            Assert.That(actualJson, Is.EqualTo(expectedJson), expectedJson.DifferencesTo(actualJson));
         }
 
         [Test]
@@ -148,8 +148,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            ClassicAssert.IsFalse(parsed.Success);
-            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }

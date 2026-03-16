@@ -1,4 +1,4 @@
-﻿using IF.Lastfm.Core.Api.Enums;
+using IF.Lastfm.Core.Api.Enums;
 using IF.Lastfm.Core.Objects;
 using IF.Lastfm.Core.Tests.Resources;
 using NUnit.Framework;
@@ -19,7 +19,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Library
             var command = new GetTracksCommand(MAuth.Object, "rj", "", "", DateTimeOffset.MinValue)
             {
                 Count = 1
-            }; 
+            };
 
             var expectedTrack = new LastTrack
             {
@@ -45,7 +45,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Library
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(LibraryApiResponses.LibraryGetTracksMultiple));
             var actual = await command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(actual.Success);
+            Assert.That(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Content[1]); // Testing the second track returned
         }
 
@@ -74,23 +74,23 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Library
                     "http://userserve-ak.last.fm/serve/126/56827829.jpg",
                     "http://userserve-ak.last.fm/serve/300x300/56827829.jpg")
             };
-            
+
             var file = GetFileContents("LibraryApi.LibraryGetTracksSingle.json");
             var response = CreateResponseMessage(file);
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(LibraryApiResponses.LibraryGetTracksSingle));
             var actual = await command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(actual.Success);
+            Assert.That(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Single());
         }
-        
+
         [Test]
         public async Task HandleErrorResponse()
         {
             var command = new GetTracksCommand(MAuth.Object, "rj", "", "", DateTimeOffset.MinValue)
             {
                 Count = 1
-            }; 
+            };
 
             var file = GetFileContents("AlbumApi.AlbumGetInfoMissing.json");
             var response = CreateResponseMessage(file);
@@ -98,8 +98,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Library
 
             var parsed = await command.HandleResponse(response);
 
-            ClassicAssert.IsFalse(parsed.Success);
-            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }

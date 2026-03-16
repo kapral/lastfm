@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using IF.Lastfm.Core.Api.Enums;
 using IF.Lastfm.Core.Tests.Resources;
@@ -41,18 +41,18 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
 
             expectedTags[0].Streamable = false;
             expectedTags[1].Streamable = null;
-            
+
             var file = GetFileContents("Tag.GetSimilarSuccess.json");
             var response = CreateResponseMessage(file);
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(TagApiResponses.GetSimilarSuccess));
             var actual = await command.HandleResponse(response);
 
-            ClassicAssert.IsTrue(actual.Skip(2).All(t => t.Streamable.GetValueOrDefault()));
-            ClassicAssert.IsTrue(actual.All(t => t.RelatedTo == tagName));
-            ClassicAssert.IsTrue(actual.Success);
+            Assert.That(actual.Skip(2).All(t => t.Streamable.GetValueOrDefault()));
+            Assert.That(actual.All(t => t.RelatedTo == tagName));
+            Assert.That(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTags, actual.ToList());
         }
-        
+
         [Test]
         public async Task HandleErrorResponse()
         {
@@ -64,8 +64,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
 
             var parsed = await command.HandleResponse(response);
 
-            ClassicAssert.IsFalse(parsed.Success);
-            ClassicAssert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }
