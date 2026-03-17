@@ -7,6 +7,8 @@
 
 ## What this fork adds
 
+- **Targets .NET 10** — dropped `netstandard1.1` in favour of `net10.0`; `System.Net.Http` is no longer a separate dependency
+
 - **Richer error details on all responses** — `LastResponse` now exposes:
   - `ErrorMessage` — the human-readable message from the Last.fm API (e.g. `"The artist you supplied could not be found"`)
   - `HttpStatusCode` — the HTTP status code returned by the server
@@ -17,6 +19,8 @@
 - **Desktop authentication flow** (`auth.getToken`) — `client.Auth.GetAuthTokenAsync()` fetches an unauthorised request token as step 1 of the [desktop auth flow](https://www.last.fm/api/desktopauth)
 
 - **Artist-filtered track search** — `client.Track.SearchAsync` accepts an optional `artistName` parameter to narrow results to a specific artist
+
+- **Removed `LastArtist.MainImage`** — the property was marked obsolete since May 2019; Last.fm has not returned real artist imagery via the API since then (all responses contain the same generic placeholder image)
 
 ## Project Goals
 
