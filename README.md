@@ -112,12 +112,11 @@ if (!response.Success) {
 
 ## Platform Compatibility
 
-The main package targets `netstandard1.1`, compatible with .NET Framework 4.5.1+, .NET Core, UWP, and Xamarin.
+The main package targets `net10.0`.
 
 ### Dependencies
 
-- Newtonsoft.Json 9.0.1
-- System.Net.Http 4.3.2
+- Newtonsoft.Json 13.0.3
 
 ## Credits
 
