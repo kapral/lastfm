@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using IF.Lastfm.Core.Api.Enums;
@@ -23,7 +23,7 @@ namespace IF.Lastfm.Core.Tests
                     {"blue", "performance"}
                 }, true);
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
@@ -31,23 +31,23 @@ namespace IF.Lastfm.Core.Tests
         {
             LastResponseStatus status;
 
-            Assert.IsFalse(LastFm.IsResponseValid(null, out status));
-            Assert.IsFalse(LastFm.IsResponseValid("{invalid json", out status));
+            Assert.That(LastFm.IsResponseValid(null, out status), Is.False);
+            Assert.That(LastFm.IsResponseValid("{invalid json", out status), Is.False);
 
             var error6 = GetFileContents("ArtistApi.ArtistGetTagsError.json");
             //var error6 = Encoding.UTF8.GetString(ArtistApiResponses.ArtistGetTagsError);
-            Assert.IsFalse(LastFm.IsResponseValid(error6, out status));
-            Assert.AreEqual(LastResponseStatus.MissingParameters, status);
+            Assert.That(LastFm.IsResponseValid(error6, out status), Is.False);
+            Assert.That(status, Is.EqualTo(LastResponseStatus.MissingParameters));
 
             string message;
-            Assert.IsFalse(LastFm.IsResponseValid(error6, out status, out message));
-            Assert.AreEqual(LastResponseStatus.MissingParameters, status);
-            Assert.AreEqual("Invalid user supplied", message);
+            Assert.That(LastFm.IsResponseValid(error6, out status, out message), Is.False);
+            Assert.That(status, Is.EqualTo(LastResponseStatus.MissingParameters));
+            Assert.That(message, Is.EqualTo("Invalid user supplied"));
 
             var goodResponse = GetFileContents("ArtistApi.ArtistGetInfoSuccess.json");
             //var goodResponse = Encoding.UTF8.GetString(ArtistApiResponses.ArtistGetInfoSuccess);
-            Assert.IsTrue(LastFm.IsResponseValid(goodResponse, out status));
-            Assert.AreEqual(LastResponseStatus.Successful, status);
+            Assert.That(LastFm.IsResponseValid(goodResponse, out status));
+            Assert.That(status, Is.EqualTo(LastResponseStatus.Successful));
         }
 
         protected string GetFileContents(string sampleFile)

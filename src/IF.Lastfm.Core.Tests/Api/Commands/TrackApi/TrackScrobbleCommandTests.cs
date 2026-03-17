@@ -56,10 +56,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var responseMessage = CreateResponseMessage(file);
             //var responseMessage = CreateResponseMessage(Encoding.UTF8.GetString(TrackApiResponses.TrackScrobbleRejected));
             var response = await _command.HandleResponse(responseMessage) as ScrobbleResponse;
-            
-            Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.Ignored.Count());
-            Assert.AreEqual("Artist name failed filter: Various", response.Ignored.First().IgnoredReason);
+
+            Assert.That(response.Success);
+            Assert.That(response.Ignored.Count(), Is.EqualTo(1));
+            Assert.That(response.Ignored.First().IgnoredReason, Is.EqualTo("Artist name failed filter: Various"));
         }
 
         [Test]
@@ -69,9 +69,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var responseMessage = CreateResponseMessage(file);
             //var responseMessage = CreateResponseMessage(Encoding.UTF8.GetString(TrackApiResponses.TrackScrobbleSuccess));
             var response = await _command.HandleResponse(responseMessage);
-            
-            Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.AcceptedCount);
+
+            Assert.That(response.Success);
+            Assert.That(response.AcceptedCount, Is.EqualTo(1));
         }
 
         [Test]
@@ -81,9 +81,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var responseMessage = CreateResponseMessage(file);
             //var responseMessage = CreateResponseMessage(Encoding.UTF8.GetString(TrackApiResponses.TrackScrobbleSuccessNoAlbumProperty));
             var response = await _command.HandleResponse(responseMessage);
-            
-            Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.AcceptedCount);
+
+            Assert.That(response.Success);
+            Assert.That(response.AcceptedCount, Is.EqualTo(1));
         }
     }
 }

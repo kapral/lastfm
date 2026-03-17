@@ -54,8 +54,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var response = CreateResponseMessage(file);
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
 
         [Test]
@@ -64,17 +64,17 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var file = GetFileContents("UserApi.UserGetWeeklyChartList.json");
             var response = CreateResponseMessage(file);
             var parsed = await _command.HandleResponse(response);
-            
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(612, parsed.Content.Count);
+
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content.Count, Is.EqualTo(612));
 
             //convert dates back to unix time
             var lastPeriod = parsed.Content.Last();
 
-            Assert.AreEqual("1546171200", lastPeriod.From.ToString());
-            Assert.AreEqual("1546776000", lastPeriod.To.ToString());
-            Assert.AreEqual(new DateTime(2018,12,30,12,0,0), lastPeriod.FromDate);
-            Assert.AreEqual(new DateTime(2019,1,6,12,0,0), lastPeriod.ToDate);
+            Assert.That(lastPeriod.From.ToString(), Is.EqualTo("1546171200"));
+            Assert.That(lastPeriod.To.ToString(), Is.EqualTo("1546776000"));
+            Assert.That(lastPeriod.FromDate, Is.EqualTo(new DateTime(2018,12,30,12,0,0)));
+            Assert.That(lastPeriod.ToDate, Is.EqualTo(new DateTime(2019,1,6,12,0,0)));
         }
 
     }

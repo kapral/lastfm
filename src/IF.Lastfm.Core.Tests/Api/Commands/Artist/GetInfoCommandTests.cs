@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,64 +31,33 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
                 Name = "Frightened Rabbit",
                 Mbid = "dc21d171-7204-4759-9fd0-77d031aeb40c",
                 Url = new Uri("http://www.last.fm/music/Frightened+Rabbit"),
-                MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/50340089.jpg",
-                    "http://userserve-ak.last.fm/serve/64/50340089.jpg",
-                    "http://userserve-ak.last.fm/serve/126/50340089.jpg",
-                    "http://userserve-ak.last.fm/serve/252/50340089.jpg",
-                    "http://userserve-ak.last.fm/serve/_/50340089/Frightened+Rabbit+frabbit.jpg"),
-                    // todo streamable
-                    OnTour = false,
+                OnTour = false,
                 Similar = new List<LastArtist>
                 {
                     new LastArtist
                     {
                         Name = "Admiral Fallow",
-                        Url = new Uri("http://www.last.fm/music/Admiral+Fallow"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/48454975.jpg",
-                            "http://userserve-ak.last.fm/serve/64/48454975.jpg",
-                            "http://userserve-ak.last.fm/serve/126/48454975.jpg",
-                            "http://userserve-ak.last.fm/serve/252/48454975.jpg",
-                            "http://userserve-ak.last.fm/serve/500/48454975/Admiral+Fallow+l_1185fb2755064ccfbab2871ecec8.jpg")
+                        Url = new Uri("http://www.last.fm/music/Admiral+Fallow")
                     },
                     new LastArtist
                     {
                         Name = "The Twilight Sad",
                         Url = new Uri("http://www.last.fm/music/The+Twilight+Sad"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/18201771.jpg",
-                            "http://userserve-ak.last.fm/serve/64/18201771.jpg",
-                            "http://userserve-ak.last.fm/serve/126/18201771.jpg",
-                            "http://userserve-ak.last.fm/serve/252/18201771.jpg",
-                            "http://userserve-ak.last.fm/serve/500/18201771/The+Twilight+Sad+hi+how+are+you.jpg"),
                     },
                     new LastArtist
                     {
                         Name = "Owl John",
                         Url = new Uri("http://www.last.fm/music/Owl+John"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/101981791.png",
-                            "http://userserve-ak.last.fm/serve/64/101981791.png",
-                            "http://userserve-ak.last.fm/serve/126/101981791.png",
-                            "http://userserve-ak.last.fm/serve/252/101981791.png",
-                            "http://userserve-ak.last.fm/serve/500/101981791/Owl+John+owl.png"),
                     },
                     new LastArtist
                     {
                         Name = "We Were Promised Jetpacks",
                         Url = new Uri("http://www.last.fm/music/We+Were+Promised+Jetpacks"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/53527397.jpg",
-                            "http://userserve-ak.last.fm/serve/64/53527397.jpg",
-                            "http://userserve-ak.last.fm/serve/126/53527397.jpg",
-                            "http://userserve-ak.last.fm/serve/252/53527397.jpg",
-                            "http://userserve-ak.last.fm/serve/_/53527397/We+Were+Promised+Jetpacks+wwpj.jpg"),
                     },
                     new LastArtist
                     {
                         Name = "Meursault",
                         Url = new Uri("http://www.last.fm/music/Meursault"),
-                        MainImage = new LastImageSet("http://userserve-ak.last.fm/serve/34/41921789.jpg",
-                            "http://userserve-ak.last.fm/serve/64/41921789.jpg",
-                            "http://userserve-ak.last.fm/serve/126/41921789.jpg",
-                            "http://userserve-ak.last.fm/serve/252/41921789.jpg",
-                            "http://userserve-ak.last.fm/serve/_/41921789/Meursault+lovely+fuckwits.jpg"),
                     }
                 },
                 Tags = new List<LastTag>
@@ -112,20 +81,20 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
                     Plays = 0
                 }
             };
-            
+
             var file = GetFileContents("ArtistApi.ArtistGetInfoSuccess.json");
             var response = CreateResponseMessage(file);
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(ArtistApiResponses.ArtistGetInfoSucess));
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
+            Assert.That(parsed.Success);
 
             var expectedJson = expectedArtist.TestSerialise();
             var actualJson = parsed.Content.TestSerialise();
 
-            Assert.AreEqual(expectedJson, actualJson, expectedJson.DifferencesTo(actualJson));
+            Assert.That(actualJson, Is.EqualTo(expectedJson), expectedJson.DifferencesTo(actualJson));
         }
-        
+
         [Test]
         public void ArtistGetInfo_SetLangParam_Success()
         {
@@ -134,13 +103,13 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
                 ArtistName = "Frightened Rabbit",
                 BioLanguage = "fr"
             };
-            
+
             //call the commands SetParameter method - this is ususally done in Command.ExecuteAsync
             _command2.SetParameters();
-            
-            string langValue; 
-            Assert.IsTrue(_command2.Parameters.TryGetValue("lang", out langValue));
-            Assert.AreEqual("fr", langValue);
+
+            string langValue;
+            Assert.That(_command2.Parameters.TryGetValue("lang", out langValue));
+            Assert.That(langValue, Is.EqualTo("fr"));
         }
 
         [Test]
@@ -152,8 +121,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Artist
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }

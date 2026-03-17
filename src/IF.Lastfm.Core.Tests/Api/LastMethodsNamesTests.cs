@@ -1,4 +1,4 @@
-﻿using IF.Lastfm.Core.Api;
+using IF.Lastfm.Core.Api;
 using IF.Lastfm.Core.Api.Commands;
 using IF.Lastfm.Core.Api.Helpers;
 using NUnit.Framework;
@@ -21,7 +21,7 @@ namespace IF.Lastfm.Core.Tests.Api
 
             var commandsWithoutAttribute = allCommands.Where(x => !x.GetCustomAttributes<ApiMethodNameAttribute>().Any());
 
-            Assert.IsFalse(commandsWithoutAttribute.Any(), "Warning, all commands should have anApiMethodNameAttribute.");
+            Assert.That(commandsWithoutAttribute.Any(), Is.False, "Warning, all commands should have anApiMethodNameAttribute.");
         }
     }
 }

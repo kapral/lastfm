@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,8 +25,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
             var parsed = await command.HandleResponse(response);
 
             //Assert
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
         }
 
         [Test]
@@ -42,8 +42,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
             var parsed = await command.HandleResponse(response);
 
             //Assert
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
         }
 
         [Test]
@@ -57,8 +57,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.Tag
 
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }

@@ -60,7 +60,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var http = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopAlbumsError));
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
+            Assert.That(parsed.Success, Is.False);
         }
 
         [Test]
@@ -71,10 +71,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var http = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopAlbumsEmpty));
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsTrue(!parsed.Content.Any());
-            Assert.AreEqual(0, parsed.TotalItems);
-            Assert.AreEqual(1, parsed.TotalPages);
+            Assert.That(parsed.Success);
+            Assert.That(!parsed.Content.Any());
+            Assert.That(parsed.TotalItems, Is.EqualTo(0));
+            Assert.That(parsed.TotalPages, Is.EqualTo(1));
         }
 
         [Test]
@@ -103,12 +103,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var response = CreateResponseMessage(file);
             //var http = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopAlbumsSingle));
             var parsed = await _command.HandleResponse(response);
-            
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(1, parsed.Content.Count);
+
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content.Count, Is.EqualTo(1));
 
             var actualAlbum = parsed.Content.First();
-            
+
             TestHelper.AssertSerialiseEqual(expectedAlbum, actualAlbum);
         }
 
@@ -118,8 +118,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var file = GetFileContents("UserApi.UserGetTopAlbumsMultiple.json");
             var response = CreateResponseMessage(file);
             var parsed = await _command.HandleResponse(response);
-            Assert.IsTrue(response.IsSuccessStatusCode);
-            Assert.AreEqual(3, parsed.Content.Count);
+            Assert.That(response.IsSuccessStatusCode);
+            Assert.That(parsed.Content.Count, Is.EqualTo(3));
         }
     }
 }

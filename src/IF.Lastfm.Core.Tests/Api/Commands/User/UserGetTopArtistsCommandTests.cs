@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,13 +56,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
                 Name = "Anathema",
                 PlayCount = 5216,
                 Mbid = "20aa23e3-3532-42ca-acf6-e8c2e9df2688",
-                Url = new Uri("http://www.last.fm/music/Anathema"),
-                MainImage =
-                    new LastImageSet("http://userserve-ak.last.fm/serve/34/12571597.jpg",
-                        "http://userserve-ak.last.fm/serve/64/12571597.jpg",
-                        "http://userserve-ak.last.fm/serve/126/12571597.jpg",
-                        "http://userserve-ak.last.fm/serve/252/12571597.jpg",
-                        "http://userserve-ak.last.fm/serve/_/12571597/Anathema+Judgement+promo.jpg")
+                Url = new Uri("http://www.last.fm/music/Anathema")
             };
 
             var file = GetFileContents("UserApi.UserGetTopArtistsSingle.json");
@@ -70,12 +64,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsSingle));
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(1, parsed.Page);
-            Assert.AreEqual(1, parsed.PageSize);
-            Assert.AreEqual(1124, parsed.TotalItems);
-            Assert.AreEqual(1124, parsed.TotalPages);
-            Assert.AreEqual(1, parsed.Content.Count);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Page, Is.EqualTo(1));
+            Assert.That(parsed.PageSize, Is.EqualTo(1));
+            Assert.That(parsed.TotalItems, Is.EqualTo(1124));
+            Assert.That(parsed.TotalPages, Is.EqualTo(1124));
+            Assert.That(parsed.Content.Count, Is.EqualTo(1));
 
             var actualArtist = parsed.Content.First();
 
@@ -100,26 +94,14 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
                     Name = "Anathema",
                     PlayCount = 5216,
                     Mbid = "20aa23e3-3532-42ca-acf6-e8c2e9df2688",
-                    Url = new Uri("http://www.last.fm/music/Anathema"),
-                    MainImage =
-                        new LastImageSet("http://userserve-ak.last.fm/serve/34/12571597.jpg",
-                            "http://userserve-ak.last.fm/serve/64/12571597.jpg",
-                            "http://userserve-ak.last.fm/serve/126/12571597.jpg",
-                            "http://userserve-ak.last.fm/serve/252/12571597.jpg",
-                            "http://userserve-ak.last.fm/serve/_/12571597/Anathema+Judgement+promo.jpg")
+                    Url = new Uri("http://www.last.fm/music/Anathema")
                 },
                 new LastArtist
                 {
                     Name = "Insomnium",
                     PlayCount = 4670,
                     Mbid = "c1f8e226-75ea-4fe6-83ce-59c122bcbca4",
-                    Url = new Uri("http://www.last.fm/music/Insomnium"),
-                    MainImage =
-                        new LastImageSet("http://userserve-ak.last.fm/serve/34/70409268.jpg",
-                            "http://userserve-ak.last.fm/serve/64/70409268.jpg",
-                            "http://userserve-ak.last.fm/serve/126/70409268.jpg",
-                            "http://userserve-ak.last.fm/serve/252/70409268.jpg",
-                            "http://userserve-ak.last.fm/serve/500/70409268/Insomnium.jpg")
+                    Url = new Uri("http://www.last.fm/music/Insomnium")
                 },
             };
 
@@ -128,12 +110,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsMultiple));
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(1, parsed.Page);
-            Assert.AreEqual(2, parsed.PageSize);
-            Assert.AreEqual(1124, parsed.TotalItems);
-            Assert.AreEqual(562, parsed.TotalPages);
-            Assert.AreEqual(2, parsed.Content.Count);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Page, Is.EqualTo(1));
+            Assert.That(parsed.PageSize, Is.EqualTo(2));
+            Assert.That(parsed.TotalItems, Is.EqualTo(1124));
+            Assert.That(parsed.TotalPages, Is.EqualTo(562));
+            Assert.That(parsed.Content.Count, Is.EqualTo(2));
 
             var actualArtists = parsed.Content;
 
@@ -157,12 +139,12 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsEmpty));
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(1, parsed.Page);
-            Assert.AreEqual(0, parsed.PageSize);
-            Assert.AreEqual(0, parsed.TotalItems);
-            Assert.AreEqual(1, parsed.TotalPages);
-            Assert.AreEqual(0, parsed.Content.Count);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Page, Is.EqualTo(1));
+            Assert.That(parsed.PageSize, Is.EqualTo(0));
+            Assert.That(parsed.TotalItems, Is.EqualTo(0));
+            Assert.That(parsed.TotalPages, Is.EqualTo(1));
+            Assert.That(parsed.Content.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -181,13 +163,13 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetTopArtistsError));
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.AreEqual(1, parsed.Page);
-            Assert.AreEqual(0, parsed.PageSize);
-            Assert.AreEqual(0, parsed.TotalItems);
-            Assert.AreEqual(1, parsed.TotalPages);
-            Assert.AreEqual(0, parsed.Content.Count);
-            Assert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Page, Is.EqualTo(1));
+            Assert.That(parsed.PageSize, Is.EqualTo(0));
+            Assert.That(parsed.TotalItems, Is.EqualTo(0));
+            Assert.That(parsed.TotalPages, Is.EqualTo(1));
+            Assert.That(parsed.Content.Count, Is.EqualTo(0));
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }

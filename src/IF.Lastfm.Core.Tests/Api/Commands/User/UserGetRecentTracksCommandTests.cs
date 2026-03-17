@@ -1,4 +1,4 @@
-﻿using IF.Lastfm.Core.Api.Enums;
+using IF.Lastfm.Core.Api.Enums;
 using IF.Lastfm.Core.Objects;
 using NUnit.Framework;
 using System;
@@ -39,7 +39,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetRecentTracksMultiple));
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            Assert.That(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Content[2]);
         }
 
@@ -67,13 +67,13 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
                     "http://userserve-ak.last.fm/serve/126/90462319.jpg",
                     "http://userserve-ak.last.fm/serve/300x300/90462319.jpg")
             };
-            
+
             var file = GetFileContents("UserApi.UserGetRecentTracksSingle.json");
             var response = CreateResponseMessage(file);
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetRecentTracksSingle));
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            Assert.That(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Single());
         }
 
@@ -115,7 +115,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
 
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            Assert.That(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Single());
         }
 
@@ -133,8 +133,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
 
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }

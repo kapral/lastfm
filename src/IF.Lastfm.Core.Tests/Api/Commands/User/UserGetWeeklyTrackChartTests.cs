@@ -72,8 +72,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             var response = CreateResponseMessage(file);
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.AreEqual(LastResponseStatus.MissingParameters, parsed.Status);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
 
         [Test]
@@ -88,15 +88,15 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
 
             };
             //General tests
-            Assert.IsTrue(parsed.Success);
-            Assert.AreEqual(90, parsed.Content.Count);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content.Count, Is.EqualTo(90));
 
             //Tests on values being properly set
-            Assert.AreEqual("dcb03ce3-67a5-4eb3-b2d1-2a12d93a38f3", first.ArtistMbid);
-            Assert.AreEqual("1d552949-8c0b-411a-92c4-1ab34be9a536", first.Mbid);
-            Assert.AreEqual(3, first.PlayCount);
-            Assert.AreEqual(new Uri("https://www.last.fm/music/B.B.+King/_/The+Thrill+Is+Gone"), first.Url);
-            Assert.AreEqual(1, first.Rank);
+            Assert.That(first.ArtistMbid, Is.EqualTo("dcb03ce3-67a5-4eb3-b2d1-2a12d93a38f3"));
+            Assert.That(first.Mbid, Is.EqualTo("1d552949-8c0b-411a-92c4-1ab34be9a536"));
+            Assert.That(first.PlayCount, Is.EqualTo(3));
+            Assert.That(first.Url, Is.EqualTo(new Uri("https://www.last.fm/music/B.B.+King/_/The+Thrill+Is+Gone")));
+            Assert.That(first.Rank, Is.EqualTo(1));
         }
 
     }

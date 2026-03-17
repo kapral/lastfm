@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -99,7 +99,7 @@ namespace IF.Lastfm.Core.Tests
             var ones = one.TestSerialise();
             var twos = two.TestSerialise();
 
-            Assert.AreEqual(ones, twos, ones.DifferencesTo(twos));
+            Assert.That(twos, Is.EqualTo(ones), ones.DifferencesTo(twos));
         }
 
         public static string DifferencesTo<T>(this IEnumerable<T> expected, IEnumerable<T> actual)
@@ -192,20 +192,20 @@ namespace IF.Lastfm.Core.Tests
             Func<string, dynamic, string> testMessage =
                 (property, count) => string.Format(messageFormat, json, property, count);
 
-            Assert.IsTrue(pageResponse.Success == success, testMessage("success", success));
-            Assert.IsTrue(pageResponse.TotalItems == totalItems, testMessage("totalitems", totalItems));
-            Assert.IsTrue(pageResponse.PageSize == pageSize, testMessage("pagesize", pageSize));
-            Assert.IsTrue(pageResponse.Page == page, testMessage("page", page));
-            Assert.IsTrue(pageResponse.TotalPages == totalPages, testMessage("totalpages", totalPages));
+            Assert.That(pageResponse.Success, Is.EqualTo(success), testMessage("success", success));
+            Assert.That(pageResponse.TotalItems, Is.EqualTo(totalItems), testMessage("totalitems", totalItems));
+            Assert.That(pageResponse.PageSize, Is.EqualTo(pageSize), testMessage("pagesize", pageSize));
+            Assert.That(pageResponse.Page, Is.EqualTo(page), testMessage("page", page));
+            Assert.That(pageResponse.TotalPages, Is.EqualTo(totalPages), testMessage("totalpages", totalPages));
 
-            Assert.IsNotNull(pageResponse.Content, "page content is null");
-            Assert.IsTrue(pageResponse.Content.Count == totalItems, testMessage("content length", totalItems));
+            Assert.That(pageResponse.Content, Is.Not.Null, "page content is null");
+            Assert.That(pageResponse.Content.Count, Is.EqualTo(totalItems), testMessage("content length", totalItems));
         }
-        
+
         public static HttpResponseMessage CreateResponseMessage(HttpStatusCode status, string resource)
         {
             var now = new DateTimeOffset(2015, 03, 04, 20, 07, 21, TimeSpan.Zero);
-            
+
             var responseJson = GetFileContents(resource);
             //var responseJson = Encoding.UTF8.GetString(resource);
             var stringContent = new StringContent(responseJson, Encoding.UTF8, "application/json");

@@ -1,4 +1,4 @@
-﻿using IF.Lastfm.Core.Api.Enums;
+using IF.Lastfm.Core.Api.Enums;
 using IF.Lastfm.Core.Tests.Resources;
 using System.Linq;
 using System.Text;
@@ -26,11 +26,11 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
         [Test]
         public void Constructor()
         {
-            Assert.AreEqual(_command.Method, "album.search");
+            Assert.That(_command.Method, Is.EqualTo("album.search"));
 
-            Assert.AreEqual(_command.Parameters["album"], "By the throat");
-            Assert.AreEqual(_command.Parameters["page"], "2");
-            Assert.AreEqual(_command.Parameters["limit"], "3");
+            Assert.That(_command.Parameters["album"], Is.EqualTo("By the throat"));
+            Assert.That(_command.Parameters["page"], Is.EqualTo("2"));
+            Assert.That(_command.Parameters["limit"], Is.EqualTo("3"));
         }
 
         [Test]
@@ -42,10 +42,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(parsed.Page == 2);
-            Assert.IsTrue(parsed.Content.Count() == 3);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(parsed.Page, Is.EqualTo(2));
+            Assert.That(parsed.Content.Count(), Is.EqualTo(3));
         }
 
         [Test]
@@ -57,9 +57,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(parsed.Content.Count() == 1);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(parsed.Content.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -71,9 +71,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(!parsed.Content.Any());
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(!parsed.Content.Any());
         }
 
         [Test]
@@ -85,10 +85,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(!parsed.Content.Any());
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(!parsed.Content.Any());
         }
     }
 }

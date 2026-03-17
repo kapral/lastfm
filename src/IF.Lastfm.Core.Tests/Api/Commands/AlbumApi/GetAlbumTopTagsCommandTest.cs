@@ -1,4 +1,4 @@
-﻿using IF.Lastfm.Core.Api.Enums;
+using IF.Lastfm.Core.Api.Enums;
 using IF.Lastfm.Core.Tests.Resources;
 using System.Linq;
 using System.Text;
@@ -26,9 +26,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
         [Test]
         public void Constructor()
         {
-            Assert.AreEqual(_command.Method, "album.getTopTags");
-            Assert.AreEqual(_command.Parameters["album"], "Believe");
-            Assert.AreEqual(_command.Parameters["artist"], "Cher");
+            Assert.That(_command.Method, Is.EqualTo("album.getTopTags"));
+            Assert.That(_command.Parameters["album"], Is.EqualTo("Believe"));
+            Assert.That(_command.Parameters["artist"], Is.EqualTo("Cher"));
         }
 
         [Test]
@@ -40,8 +40,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
         }
 
         [Test]
@@ -53,9 +53,9 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsTrue(parsed.Success);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(!parsed.Content.Any());
+            Assert.That(parsed.Success);
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(!parsed.Content.Any());
         }
 
         [Test]
@@ -67,10 +67,10 @@ namespace IF.Lastfm.Core.Tests.Api.Commands.AlbumApi
 
             var parsed = await _command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
-            Assert.IsNotNull(parsed.Content);
-            Assert.IsTrue(!parsed.Content.Any());
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
+            Assert.That(parsed.Content, Is.Not.Null);
+            Assert.That(!parsed.Content.Any());
         }
     }
 }

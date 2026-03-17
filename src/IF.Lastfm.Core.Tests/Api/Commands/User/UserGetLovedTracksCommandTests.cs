@@ -1,4 +1,4 @@
-﻿using IF.Lastfm.Core.Api.Enums;
+using IF.Lastfm.Core.Api.Enums;
 using IF.Lastfm.Core.Objects;
 using IF.Lastfm.Core.Tests.Resources;
 using NUnit.Framework;
@@ -39,13 +39,13 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
                                             "http://userserve-ak.last.fm/serve/126/101739037.png",
                                             "http://userserve-ak.last.fm/serve/300x300/101739037.png")
                                     };
-            
+
             var file = GetFileContents("UserApi.UserGetLovedTracksMultiple.json");
             var response = CreateResponseMessage(file);
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetLovedTracksMultiple));
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            Assert.That(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Content[1]);
         }
 
@@ -77,7 +77,7 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetLovedTracksSingle));
             var actual = await command.HandleResponse(response);
 
-            Assert.IsTrue(actual.Success);
+            Assert.That(actual.Success);
             TestHelper.AssertSerialiseEqual(expectedTrack, actual.Single());
         }
 
@@ -93,8 +93,8 @@ namespace IF.Lastfm.Core.Tests.Api.Commands
             //var response = CreateResponseMessage(Encoding.UTF8.GetString(UserApiResponses.UserGetRecentTracksError));
             var parsed = await command.HandleResponse(response);
 
-            Assert.IsFalse(parsed.Success);
-            Assert.IsTrue(parsed.Status == LastResponseStatus.MissingParameters);
+            Assert.That(parsed.Success, Is.False);
+            Assert.That(parsed.Status, Is.EqualTo(LastResponseStatus.MissingParameters));
         }
     }
 }
